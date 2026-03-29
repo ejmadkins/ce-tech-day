@@ -22,9 +22,18 @@
 - Add ARIA labels to interactive elements. Ensure full keyboard navigation (Tab, Enter, Escape)
 - Extract reusable logic into custom hooks in `src/hooks/`
 
+## Design System
+
+- **Before building any UI component**, query the `design-system` MCP server to get design tokens and component specs
+- Use `get_design_tokens` for colors, typography, spacing, border radius, and shadows
+- Use `get_component_spec` for specific component styling (button, card, input, checkbox, badge)
+- Apply these tokens consistently — do not use default Tailwind colors or arbitrary values
+- The design system uses a warm amber/stone palette. Every UI element should feel cohesive
+
 ## Styling
 
 - Use Tailwind CSS utility classes for styling
+- Map design tokens to Tailwind classes or custom CSS variables where appropriate
 - Keep class lists readable — extract complex combinations into component-level variables if needed
 - Ensure responsive design: mobile-first, test at 375px and 1024px breakpoints
 
