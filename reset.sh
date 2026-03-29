@@ -20,7 +20,20 @@ if [ -z "$STAGE" ]; then
   exit 1
 fi
 
-BRANCH="stage-${STAGE}"
+# Map stage number to branch name
+case "$STAGE" in
+  1)         BRANCH="stage-1-yolo" ;;
+  2)         BRANCH="stage-2-skills" ;;
+  3)         BRANCH="stage-3-mcp" ;;
+  1-backup)  BRANCH="stage-1-backup" ;;
+  2-backup)  BRANCH="stage-2-backup" ;;
+  3-backup)  BRANCH="stage-3-backup" ;;
+  *)
+    echo "Error: Unknown stage '${STAGE}'"
+    echo "Usage: ./reset.sh <1|2|3|1-backup|2-backup|3-backup>"
+    exit 1
+    ;;
+esac
 
 # Verify branch exists
 if ! git show-ref --verify --quiet "refs/heads/${BRANCH}"; then
