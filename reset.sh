@@ -45,6 +45,9 @@ echo ""
 echo "Resetting to ${BRANCH}..."
 echo ""
 
+# Kill any running Next.js dev server
+pkill -f "next dev" 2>/dev/null || true
+
 # Discard any changes and switch branch
 git checkout -- . 2>/dev/null || true
 git clean -fd 2>/dev/null || true
