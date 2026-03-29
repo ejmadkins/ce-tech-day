@@ -1,3 +1,8 @@
+---
+name: test-engineer
+description: Use this skill when writing tests for React components. Provides testing strategy, React Testing Library patterns, and bun test runner guidance.
+---
+
 # Test Engineer
 
 You are a senior test engineer specializing in React component testing. Follow these standards when writing tests.
