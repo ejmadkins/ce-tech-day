@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI Coding Demo: From Yolo to Production
 
-## Getting Started
+A live demo showing how AI coding tools go from generating "slop" to production-quality code by progressively adding skills, plan mode, and MCP servers.
 
-First, run the development server:
+## Quick Start
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
+bun install
+./reset.sh 1    # Start at Stage 1
+```
+
+## Demo Script
+
+### Stage 1: The Yolo (~2-3 min)
+
+No AI guidance. Just let it rip.
+
+```bash
+./reset.sh 1
+gemini -y "build me a todo app with add, complete, and delete functionality"
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Point out:** Everything in one file, `any` types, inline styles, no accessibility, generic look.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**Punchline:** "It works! But would you ship this?"
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Stage 2: The Guided (~2-3 min)
 
-## Learn More
+Add coding standards via GEMINI.md. Enable plan mode.
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+./reset.sh 2
+gemini "build me a todo app with add, complete, and delete functionality"
+bun dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Point out:** Proper components, TypeScript interfaces, custom hooks, ARIA labels, keyboard nav.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Punchline:** "Same prompt, dramatically better code — because we told the AI *how* we work."
 
-## Deploy on Vercel
+### Stage 3: The Production (~2-3 min)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Connect a design system via MCP server.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+./reset.sh 3
+gemini "build me a todo app with add, complete, and delete functionality following our design system"
+bun dev
+```
+
+**Point out:** Branded amber/stone palette, custom checkboxes, progress bar, hover animations.
+
+**Punchline:** "Same prompt — but now the AI has access to our design system. This is production AI-assisted development."
+
+## Fallback
+
+If live coding goes sideways, use backup branches with pre-generated output:
+
+```bash
+./reset.sh 1-backup   # Pre-generated Stage 1 output
+./reset.sh 2-backup   # Pre-generated Stage 2 output
+./reset.sh 3-backup   # Pre-generated Stage 3 output
+bun dev
+```
+
+Each backup branch includes a `PRESENTER.md` with talking points.
+
+## Branch Structure
+
+| Branch | Contents |
+|--------|----------|
+| `main` | This README + reset script |
+| `stage-1-yolo` | Bare Next.js boilerplate |
+| `stage-2-skills` | Boilerplate + GEMINI.md |
+| `stage-3-mcp` | Boilerplate + GEMINI.md + MCP design system server |
+| `stage-1-backup` | Pre-generated yolo output |
+| `stage-2-backup` | Pre-generated skills output |
+| `stage-3-backup` | Pre-generated MCP output |
+
+## Tech Stack
+
+- Next.js (App Router) + TypeScript + Tailwind CSS
+- Bun (runtime + package manager)
+- MCP server (`@modelcontextprotocol/sdk`) for design system
