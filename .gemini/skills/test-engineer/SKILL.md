@@ -34,8 +34,12 @@ await user.type(input, "New todo");
 await user.keyboard("{Enter}");
 ```
 
-## Jest Configuration
+## Bun Test Runner
 
+This project uses `bun test` — Bun's built-in test runner (Jest-compatible).
+
+- Run tests: `bun test`
+- Watch mode: `bun test --watch`
 - Use `@testing-library/jest-dom` for extended matchers (`toBeInTheDocument`, `toHaveClass`)
 - Mock `crypto.randomUUID` if used for IDs in tests
 - Group related tests with `describe` blocks named after the component
