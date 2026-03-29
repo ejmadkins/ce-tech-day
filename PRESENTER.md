@@ -9,7 +9,8 @@ The same todo app with the same skills from Stage 2, but now the frontend-engine
 - **MCP server** (`mcp-server/index.js`) — serves design tokens and component specs via `get_design_tokens` and `get_component_spec` tools
 - **GEMINI.md** — adds "query the design system" as step 2 in the workflow, before building components
 - **Frontend-engineer skill** — updated to always query the design-system MCP before choosing colors, spacing, or styles
-- **`.gemini/settings.json`** — configures the MCP server connection
+- **`.gemini/settings.json`** — configures both MCP servers (design-system + Playwright)
+- **Playwright MCP** — Gemini can open the app in a browser, take screenshots, and verify the UI matches the design tokens
 
 ## Visual result
 
@@ -36,3 +37,5 @@ The same todo app with the same skills from Stage 2, but now the frontend-engine
 "The AI didn't guess at colors — it asked. The MCP server is the bridge between your design team's decisions and the AI's output."
 
 "Three layers working together: GEMINI.md orchestrates the workflow, skills provide expert guidance, and MCP connects to your real systems. That's the difference between AI-generated code and AI-assisted production code."
+
+"And watch this — the AI doesn't just build it and hope for the best. It opens the app with Playwright, takes a screenshot, and checks its own work against the design system. That's the verification loop."
