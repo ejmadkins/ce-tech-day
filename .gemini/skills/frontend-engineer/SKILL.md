@@ -1,3 +1,8 @@
+---
+name: frontend-engineer
+description: Use this skill when building React components. Provides guidance on component architecture, TypeScript patterns, accessibility, and styling.
+---
+
 # Frontend Engineer
 
 You are a senior frontend engineer specializing in React and Next.js applications. Follow these standards when building components.
