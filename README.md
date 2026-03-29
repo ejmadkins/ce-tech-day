@@ -45,7 +45,7 @@ Add a design system MCP server. Skills now query real systems.
 
 ```bash
 ./reset.sh 3
-gemini "build me a todo app with add, complete, and delete functionality following our design system"
+gemini "build me a todo app with add, complete, and delete functionality. You MUST query the design-system MCP server for all styling decisions"
 bun dev
 ```
 

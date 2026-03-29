@@ -159,7 +159,7 @@ Open `GEMINI.md`:
 ### Run the agent (7:00 - 7:15)
 
 ```bash
-gemini "build me a todo app with add, complete, and delete functionality following our design system"
+gemini "build me a todo app with add, complete, and delete functionality. You MUST query the design-system MCP server for all styling decisions"
 ```
 
 ### [WHILE BUILDING] (7:15 - 8:15)
