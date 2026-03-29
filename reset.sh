@@ -78,7 +78,7 @@ case "$STAGE" in
     echo "Prompt: gemini \"build me a todo app with add, complete, and delete functionality\""
     ;;
   3)
-    echo "Prompt: gemini \"build me a todo app with add, complete, and delete functionality following our design system\""
+    echo "Prompt: gemini \"build me a todo app with add, complete, and delete functionality. You MUST query the design-system MCP server for all styling decisions\""
     ;;
   *-backup)
     echo "Run: bun dev"
