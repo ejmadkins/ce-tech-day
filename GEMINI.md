@@ -18,13 +18,15 @@ Do not use npm, yarn, or pnpm.
 - `src/hooks/` — Custom React hooks for reusable logic
 - `src/app/` — Next.js App Router pages and layouts
 
-## Design System
+## Design System (CRITICAL)
 
-This project has a design system served via MCP. Before building any UI:
+This project has a mandatory design system served via MCP. You MUST query it before writing ANY styles.
 
-1. Query the `design-system` MCP server using `get_design_tokens` for colors, typography, spacing, border radius, and shadows
-2. Use `get_component_spec` for specific component styling (button, card, input, checkbox, badge)
-3. Apply these tokens consistently — do not use default Tailwind colors or arbitrary values
+1. ALWAYS call `get_design_tokens` FIRST — before writing any CSS, Tailwind classes, or inline styles
+2. ALWAYS call `get_component_spec` for every UI component you build (button, card, input, checkbox, badge)
+3. Apply these tokens consistently — do NOT use default Tailwind colors or arbitrary values
+4. Do NOT guess at colors, spacing, or typography. The MCP server is the single source of truth
+5. If you skip the MCP query, the styling WILL be wrong
 
 ## Workflow
 
