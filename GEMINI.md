@@ -1,44 +1,29 @@
-# Project Guidelines
+# Project Context
 
-## Architecture
+This is a Next.js application using the App Router with TypeScript, Tailwind CSS, and Bun.
 
-- This is a Next.js application using the App Router with TypeScript and Tailwind CSS
-- Use React Server Components by default; only add "use client" when the component needs interactivity (event handlers, useState, useEffect)
-- All components go in `src/components/`, one component per file, named with PascalCase (e.g., `TodoItem.tsx`)
-- Shared types go in `src/types/index.ts`
-- Keep page components thin — they compose components, they don't contain business logic
+## Project Structure
 
-## TypeScript
-
-- Strict TypeScript everywhere — no `any`, no `as` escape hatches
-- Define explicit interfaces for all data structures (e.g., `interface Todo { id: string; title: string; completed: boolean }`)
-- Use `React.FC` sparingly; prefer explicit prop types: `function TodoItem({ todo }: { todo: Todo })`
-
-## Code Quality
-
-- Plan your approach before writing code. Think through the component hierarchy and data flow first
-- Handle loading and error states explicitly — never leave the user staring at a blank screen
-- Use semantic HTML elements (`<main>`, `<section>`, `<ul>`, `<button>`) not generic `<div>` soup
-- Add ARIA labels to interactive elements. Ensure full keyboard navigation (Tab, Enter, Escape)
-- Extract reusable logic into custom hooks in `src/hooks/`
+- `src/components/` — React components, one per file, PascalCase naming
+- `src/types/` — Shared TypeScript interfaces and types
+- `src/hooks/` — Custom React hooks for reusable logic
+- `src/app/` — Next.js App Router pages and layouts
 
 ## Design System
 
-- **Before building any UI component**, query the `design-system` MCP server to get design tokens and component specs
-- Use `get_design_tokens` for colors, typography, spacing, border radius, and shadows
-- Use `get_component_spec` for specific component styling (button, card, input, checkbox, badge)
-- Apply these tokens consistently — do not use default Tailwind colors or arbitrary values
-- The design system uses a warm amber/stone palette. Every UI element should feel cohesive
+This project has a design system served via MCP. Before building any UI:
 
-## Styling
+1. Query the `design-system` MCP server using `get_design_tokens` for colors, typography, spacing, border radius, and shadows
+2. Use `get_component_spec` for specific component styling (button, card, input, checkbox, badge)
+3. Apply these tokens consistently — do not use default Tailwind colors or arbitrary values
 
-- Use Tailwind CSS utility classes for styling
-- Map design tokens to Tailwind classes or custom CSS variables where appropriate
-- Keep class lists readable — extract complex combinations into component-level variables if needed
-- Ensure responsive design: mobile-first, test at 375px and 1024px breakpoints
+## Workflow
 
-## Testing
+When building features, follow this process:
 
-- Write unit tests alongside components using Jest and React Testing Library
-- Test files go next to the component: `TodoItem.test.tsx` beside `TodoItem.tsx`
-- Test behavior, not implementation — test what the user sees and does, not internal state
+1. **Plan first** — Think through the component hierarchy and data flow before writing code
+2. **Query the design system** — Get design tokens and component specs from the MCP server
+3. **Build components** — Use the `frontend-engineer` skill for component architecture, TypeScript patterns, accessibility, and styling guidance
+4. **Write tests** — Use the `test-engineer` skill to add tests for every component
+
+Always activate the relevant skill before starting each phase.
