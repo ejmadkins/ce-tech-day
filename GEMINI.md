@@ -2,6 +2,15 @@
 
 This is a Next.js application using the App Router with TypeScript, Tailwind CSS, and Bun.
 
+## Runtime
+
+This project uses **Bun** as the runtime and package manager. Always use bun commands:
+- `bun dev` — start the dev server
+- `bun test` — run tests (bun has a built-in Jest-compatible test runner)
+- `bun install` — install dependencies
+
+Do not use npm, yarn, or pnpm.
+
 ## Project Structure
 
 - `src/components/` — React components, one per file, PascalCase naming
