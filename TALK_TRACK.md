@@ -140,7 +140,7 @@ Quick tour:
 
 Open `.gemini/settings.json`:
 
-"MCP — Model Context Protocol. It lets the AI connect to external tools and systems. Here we've configured an MCP server that serves our design system."
+"MCP — Model Context Protocol. It lets the AI connect to external tools and systems. Here we've configured two MCP servers — one serves our design system, and the other is Playwright, so the AI can actually open the app in a browser and verify its own work."
 
 Open `mcp-server/index.js` and scroll through:
 
@@ -173,6 +173,8 @@ If agent is still going:
 "Think about what this means for your workflow. Your design team updates the design system, and every AI-assisted build automatically uses the latest tokens. No copy-pasting hex codes. No 'which blue are we using again?' The single source of truth is the MCP server."
 
 "And this isn't limited to design. You could have an MCP server that serves your API contract, so the AI generates correct fetch calls. Or one that serves your database schema, so it writes correct queries. The pattern is the same."
+
+"Watch — after it finishes building, it should use Playwright to open the app and check its own work. It takes a screenshot, compares it against the design tokens, and verifies the UI is right. The AI doesn't just build and hope — it checks."
 
 ### After it finishes (8:15 - 9:00)
 
