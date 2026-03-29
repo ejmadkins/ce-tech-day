@@ -34,5 +34,6 @@ When building features, follow this process:
 2. **Query the design system** — Get design tokens and component specs from the MCP server
 3. **Build components** — Use the `frontend-engineer` skill for component architecture, TypeScript patterns, accessibility, and styling guidance
 4. **Write tests** — Use the `test-engineer` skill to add tests for every component
+5. **Verify visually** — Start the dev server with `bun dev`, then use Playwright to open http://localhost:3000, take a screenshot, and verify the UI matches the design system tokens
 
 Always activate the relevant skill before starting each phase.
