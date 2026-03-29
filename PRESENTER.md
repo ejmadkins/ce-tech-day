@@ -2,7 +2,14 @@
 
 ## What you're looking at
 
-The same todo app, same code quality as Stage 2, but now visually polished with a branded design system served via MCP.
+The same todo app with the same skills from Stage 2, but now the frontend-engineer skill queries a design system MCP server before making any styling decisions.
+
+## What changed from Stage 2
+
+- **MCP server** (`mcp-server/index.js`) — serves design tokens and component specs via `get_design_tokens` and `get_component_spec` tools
+- **GEMINI.md** — adds "query the design system" as step 2 in the workflow, before building components
+- **Frontend-engineer skill** — updated to always query the design-system MCP before choosing colors, spacing, or styles
+- **`.gemini/settings.json`** — configures the MCP server connection
 
 ## Visual result
 
@@ -24,6 +31,8 @@ The same todo app, same code quality as Stage 2, but now visually polished with 
 5. **Progress bar** — visual indicator of completion with smooth transitions
 6. **Brand personality** — "What's on your plate?" heading, Task Manager badge
 
-## Key talking point
+## Key talking points
 
-"Same prompt, same code quality, but now the AI queried our design system via MCP before building. It didn't guess at colors — it asked. This is the difference between AI-generated code and AI-assisted production code. The MCP server is the bridge between your design team's decisions and the AI's output."
+"The AI didn't guess at colors — it asked. The MCP server is the bridge between your design team's decisions and the AI's output."
+
+"Three layers working together: GEMINI.md orchestrates the workflow, skills provide expert guidance, and MCP connects to your real systems. That's the difference between AI-generated code and AI-assisted production code."
