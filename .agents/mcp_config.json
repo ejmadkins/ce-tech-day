@@ -11,6 +11,13 @@
         "-y",
         "chrome-devtools-mcp@latest"
       ]
+    },
+    "cloud-run": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@google-cloud/cloud-run-mcp"
+      ]
     }
   }
 }
