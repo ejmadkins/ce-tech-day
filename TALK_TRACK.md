@@ -140,7 +140,7 @@ Quick tour:
 
 Open `.agents/mcp_config.json`:
 
-"MCP — Model Context Protocol. It lets the AI connect to external tools and systems. Here we've configured an MCP server that serves our design system."
+"MCP — Model Context Protocol. It lets the AI connect to external tools and systems. Here we've configured two MCP servers: one for our design system, and another for Chrome DevTools. This second server gives the agent eyes — it can run a browser, navigate to our local app, and take screenshots to visually inspect its work."
 
 Open `mcp-server/index.js` and scroll through:
 
@@ -152,9 +152,9 @@ Point at the color values:
 
 Open `.antigravity.md`:
 
-".antigravity.md now has a new step in the workflow: query the design system before building. And the frontend-engineer skill tells the agent to always check the MCP server before making styling decisions."
+".antigravity.md now has two new steps in the workflow: query the design system before building, and visually verify the app in the browser after building. And the frontend-engineer skill tells the agent to always check the design tokens and then verify they look correct in the browser."
 
-"The AI doesn't guess at colors — it asks."
+"The AI doesn't guess at colors — it asks, and it checks its work."
 
 ### Run the agent (7:00 - 7:15)
 
@@ -164,9 +164,9 @@ agy "build me a todo app with add, complete, and delete functionality. You MUST 
 
 ### [WHILE BUILDING] (7:15 - 8:15)
 
-"Watch for the MCP tool calls — you'll see it query `get_design_tokens` and `get_component_spec`. It's pulling our actual design system before writing any CSS."
+"Watch for the MCP tool calls — you'll see it query `get_design_tokens` and `get_component_spec`. It's pulling our actual design system before writing any CSS. And once it's done building, it will launch a browser via Chrome DevTools, navigate to localhost, and take a screenshot to make sure everything rendered correctly."
 
-"This is where it gets powerful. That MCP server could connect to anything — your Figma tokens, your Storybook, your API schema, your database migrations. Any system your team uses can become a tool the AI queries."
+"This is where it gets powerful. Those MCP servers connect the AI to our real systems and tools — design tokens, testing runners, browser viewport. Any system your team uses can become a tool the AI queries or controls."
 
 If agent is still going:
 

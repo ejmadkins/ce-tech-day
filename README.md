@@ -41,7 +41,7 @@ bun dev
 
 ### Stage 3: The Production (~2-3 min)
 
-Add a design system MCP server. Skills now query real systems.
+Add a design system MCP server and a Chrome DevTools MCP server. Skills now query real systems and verify UI visually.
 
 ```bash
 ./reset.sh 3
@@ -49,9 +49,9 @@ agy "build me a todo app with add, complete, and delete functionality. You MUST 
 bun dev
 ```
 
-**Point out:** Branded amber/stone palette, custom checkboxes, progress bar. The frontend-engineer skill queried the MCP server for design tokens before styling.
+**Point out:** Branded amber/stone palette, custom checkboxes, progress bar. The frontend-engineer skill queried the MCP server for design tokens, and visually verified the UI using Chrome DevTools.
 
-**Punchline:** "Three layers: .antigravity.md orchestrates, skills provide expertise, MCP connects to real systems. The AI didn't guess at colors — it asked."
+**Punchline:** "Three layers: .antigravity.md orchestrates, skills provide expertise, MCP connects to real systems. The AI didn't guess at colors — it asked, and then it verified the browser."
 
 ## Fallback
 
