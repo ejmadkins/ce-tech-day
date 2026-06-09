@@ -2,13 +2,13 @@
 
 ## What you're looking at
 
-The same todo app, but generated with GEMINI.md orchestration and two Gemini CLI skills: a frontend engineer and a test engineer.
+The same todo app, but generated with .antigravity.md orchestration and two Antigravity CLI skills: a frontend engineer and a test engineer.
 
 ## What changed from Stage 1
 
-- **GEMINI.md** — the conductor. Defines project context and the workflow: plan first, then build components (frontend-engineer skill), then write tests (test-engineer skill)
-- **`.gemini/skills/frontend-engineer/`** — on-demand specialist for component architecture, TypeScript, accessibility, styling
-- **`.gemini/skills/test-engineer/`** — on-demand specialist for testing strategy, React Testing Library patterns
+- **.antigravity.md** — the conductor. Defines project context and the workflow: plan first, then build components (frontend-engineer skill), then write tests (test-engineer skill)
+- **`.agents/skills/frontend-engineer/`** — on-demand specialist for component architecture, TypeScript, accessibility, styling
+- **`.agents/skills/test-engineer/`** — on-demand specialist for testing strategy, React Testing Library patterns
 
 ## Visual result
 
@@ -30,6 +30,6 @@ The same todo app, but generated with GEMINI.md orchestration and two Gemini CLI
 
 ## Key talking points
 
-"GEMINI.md is the conductor — it defines the process. Skills are the specialists. The frontend-engineer skill packages component best practices. The test-engineer skill packages testing expertise. Different team members can own different skills."
+".antigravity.md is the conductor — it defines the process. Skills are the specialists. The frontend-engineer skill packages component best practices. The test-engineer skill packages testing expertise. Different team members can own different skills."
 
 "Same prompt, same model, dramatically better code. The AI activated the right specialist at the right time."
