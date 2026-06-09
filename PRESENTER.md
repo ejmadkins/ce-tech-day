@@ -6,10 +6,12 @@ The same todo app with the same skills from Stage 2, but now the frontend-engine
 
 ## What changed from Stage 2
 
-- **MCP server** (`mcp-server/index.js`) — serves design tokens and component specs via `get_design_tokens` and `get_component_spec` tools
-- **.antigravity.md** — adds "query the design system" as step 2 in the workflow, before building components
-- **Frontend-engineer skill** — updated to always query the design-system MCP before choosing colors, spacing, or styles
-- **`.agents/mcp_config.json`** — configures the MCP server connection
+- **MCP servers**:
+  - **Design System** (`mcp-server/index.js`) — serves design tokens and component specs via `get_design_tokens` and `get_component_spec` tools.
+  - **Chrome DevTools** (`chrome-devtools-mcp`) — allows the agent to launch/control the browser and visually verify UI changes.
+- **.antigravity.md** — adds design system queries as step 2 and visual verification via browser as step 5 in the workflow.
+- **Frontend-engineer skill** — updated to always query the design-system MCP before choosing colors, spacing, or styles.
+- **`.agents/mcp_config.json`** — configures the MCP server connections.
 
 ## Visual result
 

@@ -4,6 +4,14 @@
       "command": "node",
       "args": ["mcp-server/index.js"],
       "trust": true
+    },
+    "chrome-devtools": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "chrome-devtools-mcp@latest"
+      ]
     }
   }
 }
+
