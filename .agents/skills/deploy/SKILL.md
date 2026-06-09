@@ -47,7 +47,7 @@ Always run these verification tests immediately after deployment to ensure zero 
 ### Test A: HTTP Content & Brand Verification
 Verify that the service is serving our premium To-Do app rather than the Next.js default starter page:
 ```bash
-curl -s <SERVICE_URL> | grep -q "What's on your plate?" && echo "✅ Brand check passed!" || echo "❌ Brand check failed!"
+curl -s <SERVICE_URL> | grep -E -q "What's on your plate\?|What&#x27;s on your plate\?" && echo "✅ Brand check passed!" || echo "❌ Brand check failed!"
 ```
 
 ### Test B: Next.js Production Hydration Check
