@@ -2,7 +2,7 @@
 
 ## What you're looking at
 
-A functional but sloppy todo app generated with zero AI guidance.
+A functional but sloppy todo app generated with zero Antigravity guidance.
 
 ## Visual result
 
@@ -25,4 +25,4 @@ A functional but sloppy todo app generated with zero AI guidance.
 
 ## Key talking point
 
-"This is what you get when you let AI loose with no guidance. It works — but it's the code equivalent of a first draft. Would you code review this? Would you ship this?"
+"This is what you get when you let Antigravity loose with no guidance. It works — but it's the code equivalent of a first draft. Would you code review this? Would you ship this?"
