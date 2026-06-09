@@ -14,7 +14,7 @@ if [ -z "$STAGE" ]; then
   echo "  1          Stage 1: Yolo mode (bare Next.js, no AI config)"
   echo "  2          Stage 2: Skills + Plan mode (.antigravity.md)"
   echo "  3          Stage 3: MCP design system server"
-  echo "  4          Stage 4: Cloud Run deployment via MCP"
+  echo "  4          Stage 4: Cloud Run Deployment"
   echo "  1-backup   Pre-generated Stage 1 output"
   echo "  2-backup   Pre-generated Stage 2 output"
   echo "  3-backup   Pre-generated Stage 3 output"
@@ -39,8 +39,8 @@ case "$STAGE" in
     ;;
 esac
 
-# Verify branch exists
-if ! git show-ref --verify --quiet "refs/heads/${BRANCH}"; then
+# Verify branch exists locally or on remote
+if ! git show-ref --verify --quiet "refs/heads/${BRANCH}" && ! git show-ref --verify --quiet "refs/remotes/origin/${BRANCH}"; then
   echo "Error: Branch '${BRANCH}' does not exist"
   exit 1
 fi
@@ -85,7 +85,7 @@ case "$STAGE" in
     echo "Prompt: agy \"build me a todo app with add, complete, and delete functionality following our design system\""
     ;;
   4)
-    echo "Prompt: agy \"deploy the app to google cloud run using the cloud-run mcp server, and then run tests to make sure everything is up and running as expected\""
+    echo "Prompt: agy \"deploy our application to Cloud Run\""
     ;;
   *-backup)
     echo "Run: bun dev"
