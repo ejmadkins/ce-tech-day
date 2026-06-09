@@ -7,9 +7,9 @@ The same todo app with the same skills from Stage 2, but now the frontend-engine
 ## What changed from Stage 2
 
 - **MCP server** (`mcp-server/index.js`) — serves design tokens and component specs via `get_design_tokens` and `get_component_spec` tools
-- **GEMINI.md** — adds "query the design system" as step 2 in the workflow, before building components
+- **.antigravity.md** — adds "query the design system" as step 2 in the workflow, before building components
 - **Frontend-engineer skill** — updated to always query the design-system MCP before choosing colors, spacing, or styles
-- **`.gemini/settings.json`** — configures the MCP server connection
+- **`.agents/mcp_config.json`** — configures the MCP server connection
 
 ## Visual result
 
@@ -35,4 +35,4 @@ The same todo app with the same skills from Stage 2, but now the frontend-engine
 
 "The AI didn't guess at colors — it asked. The MCP server is the bridge between your design team's decisions and the AI's output."
 
-"Three layers working together: GEMINI.md orchestrates the workflow, skills provide expert guidance, and MCP connects to your real systems. That's the difference between AI-generated code and AI-assisted production code."
+"Three layers working together: .antigravity.md orchestrates the workflow, skills provide expert guidance, and MCP connects to your real systems. That's the difference between AI-generated code and AI-assisted production code."
