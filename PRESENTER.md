@@ -25,13 +25,13 @@ Each stage is mapped to a Git branch. You can reset to any stage instantly using
 
 ### Stage 1: Yolo Mode (Bare Next.js)
 * **Reset Command**: `./reset.sh 1` (or `./reset.sh 1-backup` for pre-generated code)
-* **Goal**: Prompt the AI to build a basic To-Do app with zero guardrails.
+* **Goal**: Prompt Antigravity to build a basic To-Do app with zero guardrails.
 * **Prompt**: 
   ```text
   agy --dangerously-skip-permissions "build me a todo app with add, complete, and delete functionality"
   ```
 * **Key Talking Points**:
-  * The AI builds a single, large file with generic/plain styling.
+  * Antigravity builds a single, large file with generic/plain styling.
   * No component architecture, no strict types, and zero tests.
   * Highlight the risk of "vibe-coding" without organizational standards.
 
@@ -52,7 +52,7 @@ Each stage is mapped to a Git branch. You can reset to any stage instantly using
 
 ### Stage 3: Enterprise Design System (MCP + Browser Verification)
 * **Reset Command**: `./reset.sh 3` (or `./reset.sh 3-backup` for pre-generated code)
-* **Goal**: Force the AI to adhere to an enterprise design system served via MCP.
+* **Goal**: Force Antigravity to adhere to an enterprise design system served via MCP.
 * **Prompt**: 
   ```text
   agy "build me a todo app with add, complete, and delete functionality following our design system"
