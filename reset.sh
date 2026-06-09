@@ -1,22 +1,24 @@
 #!/bin/bash
 # Demo Reset Script
 # Usage: ./reset.sh <stage>
-# Stages: 1, 2, 3, 1-backup, 2-backup, 3-backup
+# Stages: 1, 2, 3, 4, 1-backup, 2-backup, 3-backup, 4-backup
 
 set -e
 
 STAGE=$1
 
 if [ -z "$STAGE" ]; then
-  echo "Usage: ./reset.sh <1|2|3|1-backup|2-backup|3-backup>"
+  echo "Usage: ./reset.sh <1|2|3|4|1-backup|2-backup|3-backup|4-backup>"
   echo ""
   echo "Stages:"
   echo "  1          Stage 1: Yolo mode (bare Next.js, no AI config)"
   echo "  2          Stage 2: Skills + Plan mode (.antigravity.md)"
   echo "  3          Stage 3: MCP design system server"
+  echo "  4          Stage 4: Cloud Run deployment via MCP"
   echo "  1-backup   Pre-generated Stage 1 output"
   echo "  2-backup   Pre-generated Stage 2 output"
   echo "  3-backup   Pre-generated Stage 3 output"
+  echo "  4-backup   Pre-generated Stage 4 output"
   exit 1
 fi
 
@@ -25,12 +27,14 @@ case "$STAGE" in
   1)         BRANCH="stage-1-yolo" ;;
   2)         BRANCH="stage-2-skills" ;;
   3)         BRANCH="stage-3-mcp" ;;
+  4)         BRANCH="stage-4-deploy" ;;
   1-backup)  BRANCH="stage-1-backup" ;;
   2-backup)  BRANCH="stage-2-backup" ;;
   3-backup)  BRANCH="stage-3-backup" ;;
+  4-backup)  BRANCH="stage-4-backup" ;;
   *)
     echo "Error: Unknown stage '${STAGE}'"
-    echo "Usage: ./reset.sh <1|2|3|1-backup|2-backup|3-backup>"
+    echo "Usage: ./reset.sh <1|2|3|4|1-backup|2-backup|3-backup|4-backup>"
     exit 1
     ;;
 esac
@@ -79,6 +83,9 @@ case "$STAGE" in
     ;;
   3)
     echo "Prompt: agy \"build me a todo app with add, complete, and delete functionality following our design system\""
+    ;;
+  4)
+    echo "Prompt: agy \"deploy the app to google cloud run using the cloud-run mcp server, and then run tests to make sure everything is up and running as expected\""
     ;;
   *-backup)
     echo "Run: bun dev"

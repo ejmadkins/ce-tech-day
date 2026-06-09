@@ -53,6 +53,19 @@ bun dev
 
 **Punchline:** "Three layers: .antigravity.md orchestrates, skills provide expertise, MCP connects to real systems. The AI didn't guess at colors — it asked, and then it verified the browser."
 
+### Stage 4: Deploy and Verify (~2-3 min)
+
+Deploy the application to Google Cloud Run using the Cloud Run MCP server and run verification tests.
+
+```bash
+./reset.sh 4
+agy "deploy the app to google cloud run using the cloud-run mcp server, and then run tests to make sure everything is up and running as expected"
+```
+
+**Point out:** The agent provisions infrastructure and pushes the container. It then tests the live deployment URL to verify the service is running.
+
+**Punchline:** "We've gone from a local blank canvas to a branded, tested, and deployed application—all by orchestrating the right tools with the right skills."
+
 ## Fallback
 
 If live coding goes sideways, use backup branches with pre-generated output:
@@ -61,6 +74,7 @@ If live coding goes sideways, use backup branches with pre-generated output:
 ./reset.sh 1-backup   # Pre-generated Stage 1 output
 ./reset.sh 2-backup   # Pre-generated Stage 2 output
 ./reset.sh 3-backup   # Pre-generated Stage 3 output
+./reset.sh 4-backup   # Pre-generated Stage 4 output
 bun dev
 ```
 
@@ -74,9 +88,11 @@ Each backup branch includes a `PRESENTER.md` with talking points.
 | `stage-1-yolo` | Bare Next.js boilerplate |
 | `stage-2-skills` | Boilerplate + .antigravity.md + `.agents/skills/` (frontend-engineer, test-engineer) |
 | `stage-3-mcp` | Boilerplate + .antigravity.md + skills + MCP design system server |
+| `stage-4-deploy` | Boilerplate + .antigravity.md + skills + MCP servers + setup for Cloud Run deployment |
 | `stage-1-backup` | Pre-generated yolo output |
 | `stage-2-backup` | Pre-generated skills output |
 | `stage-3-backup` | Pre-generated MCP output |
+| `stage-4-backup` | Pre-generated deployment output |
 
 ## Tech Stack
 

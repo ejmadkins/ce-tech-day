@@ -1,6 +1,6 @@
 # Demo Talk Track
 
-Target: under 10 minutes. Times are approximate.
+Target: under 12 minutes. Times are approximate.
 
 ---
 
@@ -189,7 +189,45 @@ Quick visual comparison:
 
 ---
 
-## Closing (9:00 - 9:30)
+## Stage 4: Deploy and Verify (9:00 - 11:30)
+
+### Before running (9:00 - 9:45)
+
+```bash
+./reset.sh 4
+```
+
+"Now we have a production-ready app locally. The next logical step is getting it in front of users. We're going to deploy this to Google Cloud Run."
+
+"We've added another MCP server to our configuration: the Google Cloud Run MCP server. This gives the agent direct access to provision infrastructure, deploy containers, and manage services in GCP, all without us having to write Terraform or click through the Cloud Console."
+
+### Run the agent (9:45 - 10:00)
+
+```bash
+agy "deploy the app to google cloud run using the cloud-run mcp server, and then run tests to make sure everything is up and running as expected"
+```
+
+### [WHILE DEPLOYING] (10:00 - 11:00)
+
+"The agent is now using the Cloud Run MCP server to containerize our application and deploy it. You can see it interacting with the GCP API directly."
+
+"Once the deployment finishes, the agent doesn't just stop. The prompt asked it to run tests to ensure it's up and running. It's going to hit the live URL, verify the service is responding, and confirm the deployment was truly successful."
+
+If the agent is still going:
+
+"This is the power of extending the agent's capabilities. It's not just a code generator anymore; it's an operator. We went from generating code to testing it locally, and now we are orchestrating cloud infrastructure."
+
+### After it finishes (11:00 - 11:30)
+
+"The deployment is complete and the tests have passed. Let's open the live URL."
+
+Open the Cloud Run URL in the browser.
+
+"There it is, live on the internet. Fully functional, following our design system, deployed to production."
+
+---
+
+## Closing (11:30 - 12:00)
 
 "Three layers, same prompt, three very different results:"
 
@@ -210,7 +248,7 @@ If the agent hangs or produces something broken at any stage:
 "Let me show you what this typically produces —"
 
 ```bash
-./reset.sh X-backup   # where X is 1, 2, or 3
+./reset.sh X-backup   # where X is 1, 2, 3, or 4
 bun dev
 ```
 
