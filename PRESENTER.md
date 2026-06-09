@@ -32,4 +32,4 @@ The same todo app, but generated with .antigravity.md orchestration and two Anti
 
 ".antigravity.md is the conductor — it defines the process. Skills are the specialists. The frontend-engineer skill packages component best practices. The test-engineer skill packages testing expertise. Different team members can own different skills."
 
-"Same prompt, same model, dramatically better code. The AI activated the right specialist at the right time."
+"Same prompt, same model, dramatically better code. Antigravity activated the right specialist at the right time."
