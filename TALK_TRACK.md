@@ -6,7 +6,7 @@ Target: under 10 minutes. Times are approximate.
 
 ## Opening (0:00 - 0:30)
 
-"AI coding tools are incredible — you give them a prompt, they write code, it works. But there's a gap between 'it works' and 'I'd ship this.' Today I'm going to show you how to close that gap using three features of Gemini CLI: rules, skills, and MCP servers. Same prompt, three times, three very different results."
+"AI coding tools are incredible — you give them a prompt, they write code, it works. But there's a gap between 'it works' and 'I'd ship this.' Today I'm going to show you how to close that gap using three features of Antigravity CLI: rules, skills, and MCP servers. Same prompt, three times, three very different results."
 
 ---
 
@@ -20,12 +20,12 @@ Target: under 10 minutes. Times are approximate.
 ./reset.sh 1
 ```
 
-"No GEMINI.md, no skills, no configuration. Just a blank canvas and a prompt."
+"No .antigravity.md, no skills, no configuration. Just a blank canvas and a prompt."
 
 ### Run the agent (1:00 - 1:15)
 
 ```bash
-gemini -y "build me a todo app with add, complete, and delete functionality"
+agy --dangerously-skip-permissions "build me a todo app with add, complete, and delete functionality"
 ```
 
 "Notice the `-y` flag — that's yolo mode. It's going to auto-approve everything and just go."
@@ -34,7 +34,7 @@ gemini -y "build me a todo app with add, complete, and delete functionality"
 
 Watch the agent work for a moment, then:
 
-"So what's happening here is Gemini has no context about our project. It doesn't know our standards, our conventions, how we like to structure code. It's making every decision on its own."
+"So what's happening here is Antigravity has no context about our project. It doesn't know our standards, our conventions, how we like to structure code. It's making every decision on its own."
 
 "This is what most people do the first time they try an AI coding tool — give it a prompt and hope for the best. And it will work. The question is: is it any good?"
 
@@ -71,19 +71,19 @@ Open `src/app/page.tsx` and point out:
 
 "Same starting point, but now we've added two things."
 
-Open `GEMINI.md`:
+Open `.antigravity.md`:
 
-"First, GEMINI.md — this is always-on project context. Think of it as the conductor. It tells the AI: here's our project structure, and here's the workflow — plan first, then build components using the frontend-engineer skill, then write tests using the test-engineer skill."
+"First, .antigravity.md — this is always-on project context. Think of it as the conductor. It tells the AI: here's our project structure, and here's the workflow — plan first, then build components using the frontend-engineer skill, then write tests using the test-engineer skill."
 
-Open `.gemini/skills/` directory:
+Open `.agents/skills/` directory:
 
 "Second, skills. These are on-demand specialists that activate when they're needed."
 
-Open `.gemini/skills/frontend-engineer/SKILL.md`:
+Open `.agents/skills/frontend-engineer/SKILL.md`:
 
 "The frontend-engineer skill packages everything a senior frontend dev knows — component architecture, TypeScript patterns, accessibility requirements, styling conventions."
 
-Open `.gemini/skills/test-engineer/SKILL.md`:
+Open `.agents/skills/test-engineer/SKILL.md`:
 
 "The test-engineer skill packages testing expertise — what to test, how to use React Testing Library, testing patterns."
 
@@ -92,7 +92,7 @@ Open `.gemini/skills/test-engineer/SKILL.md`:
 ### Run the agent (3:45 - 4:00)
 
 ```bash
-gemini "build me a todo app with add, complete, and delete functionality"
+agy "build me a todo app with add, complete, and delete functionality"
 ```
 
 "Same prompt. No `-y` this time — we want it to plan first."
@@ -138,7 +138,7 @@ Quick tour:
 
 "We've got great code now, but it still looks like every other Tailwind app. In production, you have a design system — brand colors, typography, spacing rules. How do you get the AI to follow it?"
 
-Open `.gemini/settings.json`:
+Open `.agents/mcp_config.json`:
 
 "MCP — Model Context Protocol. It lets the AI connect to external tools and systems. Here we've configured an MCP server that serves our design system."
 
@@ -150,16 +150,16 @@ Point at the color values:
 
 "Amber primary, warm stone text, off-white background. This isn't Tailwind blue — this is our brand."
 
-Open `GEMINI.md`:
+Open `.antigravity.md`:
 
-"GEMINI.md now has a new step in the workflow: query the design system before building. And the frontend-engineer skill tells Gemini to always check the MCP server before making styling decisions."
+".antigravity.md now has a new step in the workflow: query the design system before building. And the frontend-engineer skill tells the agent to always check the MCP server before making styling decisions."
 
 "The AI doesn't guess at colors — it asks."
 
 ### Run the agent (7:00 - 7:15)
 
 ```bash
-gemini "build me a todo app with add, complete, and delete functionality. You MUST query the design-system MCP server for all styling decisions"
+agy "build me a todo app with add, complete, and delete functionality. You MUST query the design-system MCP server for all styling decisions"
 ```
 
 ### [WHILE BUILDING] (7:15 - 8:15)
@@ -193,7 +193,7 @@ Quick visual comparison:
 
 "Three layers, same prompt, three very different results:"
 
-"**GEMINI.md** — the conductor. Always-on project context that defines your workflow."
+"**.antigravity.md** — the conductor. Always-on project context that defines your workflow."
 
 "**Skills** — the specialists. On-demand expertise from your team, activated when needed."
 
