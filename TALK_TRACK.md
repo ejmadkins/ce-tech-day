@@ -6,11 +6,11 @@ Target: under 12 minutes. Times are approximate.
 
 ## Opening (0:00 - 0:30)
 
-"AI coding tools are incredible — you give them a prompt, they write code, it works. But there's a gap between 'it works' and 'I'd ship this.' Today I'm going to show you how to close that gap using three features of Antigravity CLI: rules, skills, and MCP servers. Same prompt, three times, three very different results."
+"Antigravity coding tools are incredible — you give them a prompt, they write code, it works. But there's a gap between 'it works' and 'I'd ship this.' Today I'm going to show you how to close that gap using three features of Antigravity CLI: rules, skills, and MCP servers. Same prompt, three times, three very different results."
 
 ---
 
-## Stage 1: The Yolo (0:30 - 3:00)
+## Stage 1: Yolo (0:30 - 3:00)
 
 ### Before running (0:30 - 1:00)
 
@@ -57,7 +57,7 @@ Open `src/app/page.tsx` and point out:
 - "No accessibility — try tabbing through this"
 - "Default browser checkboxes"
 
-"Would you approve this in a code review? Would you ship this? This is what I call AI slop — technically functional, practically useless."
+"Would you approve this in a code review? Would you ship this? This is what I call Antigravity slop — technically functional, practically useless."
 
 ---
 
@@ -73,7 +73,7 @@ Open `src/app/page.tsx` and point out:
 
 Open `.antigravity.md`:
 
-"First, .antigravity.md — this is always-on project context. Think of it as the conductor. It tells the AI: here's our project structure, and here's the workflow — plan first, then build components using the frontend-engineer skill, then write tests using the test-engineer skill."
+"First, .antigravity.md — this is always-on project context. Think of it as the conductor. It tells Antigravity: here's our project structure, and here's the workflow — plan first, then build components using the frontend-engineer skill, then write tests using the test-engineer skill."
 
 Open `.agents/skills/` directory:
 
@@ -105,9 +105,9 @@ agy "build me a todo app with add, complete, and delete functionality"
 
 If agent is still going:
 
-"The key insight here is that we didn't write more code. We didn't add any dependencies. We just told the AI how our team works. That's it. A few markdown files."
+"The key insight here is that we didn't write more code. We didn't add any dependencies. We just told Antigravity how our team works. That's it. A few markdown files."
 
-"Think about onboarding. When a new developer joins your team, you don't hand them a blank editor and say 'good luck.' You give them your coding standards, your patterns, your conventions. Skills are the same thing — but for your AI tools."
+"Think about onboarding. When a new developer joins your team, you don't hand them a blank editor and say 'good luck.' You give them your coding standards, your patterns, your conventions. Skills are the same thing — but for your Antigravity tools."
 
 ### After it finishes (5:15 - 6:00)
 
@@ -124,7 +124,7 @@ Quick tour:
 - "ARIA labels on every interactive element — try tabbing through"
 - "Still looks generic — default Tailwind blue — but the engineering is solid"
 
-"Same prompt, dramatically better code. The AI activated the right specialist at the right time."
+"Same prompt, dramatically better code. Antigravity activated the right specialist at the right time."
 
 ---
 
@@ -136,15 +136,15 @@ Quick tour:
 ./reset.sh 3
 ```
 
-"We've got great code now, but it still looks like every other Tailwind app. In production, you have a design system — brand colors, typography, spacing rules. How do you get the AI to follow it?"
+"We've got great code now, but it still looks like every other Tailwind app. In production, you have a design system — brand colors, typography, spacing rules. How do you get Antigravity to follow it?"
 
 Open `.agents/mcp_config.json`:
 
-"MCP — Model Context Protocol. It lets the AI connect to external tools and systems. Here we've configured two MCP servers: one for our design system, and another for Chrome DevTools. This second server gives the agent eyes — it can run a browser, navigate to our local app, and take screenshots to visually inspect its work."
+"MCP — Model Context Protocol. It lets Antigravity connect to external tools and systems. Here we've configured two MCP servers: one for our design system, and another for Chrome DevTools. This second server gives the agent eyes — it can run a browser, navigate to our local app, and take screenshots to visually inspect its work."
 
 Open `mcp-server/index.js` and scroll through:
 
-"This is a simple Node.js server that exposes two tools. `get_design_tokens` returns our color palette, typography, spacing — everything the AI needs to style components correctly. `get_component_spec` returns specific styling for buttons, cards, inputs, checkboxes."
+"This is a simple Node.js server that exposes two tools. `get_design_tokens` returns our color palette, typography, spacing — everything Antigravity needs to style components correctly. `get_component_spec` returns specific styling for buttons, cards, inputs, checkboxes."
 
 Point at the color values:
 
@@ -154,7 +154,7 @@ Open `.antigravity.md`:
 
 ".antigravity.md now has two new steps in the workflow: query the design system before building, and visually verify the app in the browser after building. And the frontend-engineer skill tells the agent to always check the design tokens and then verify they look correct in the browser."
 
-"The AI doesn't guess at colors — it asks, and it checks its work."
+"Antigravity doesn't guess at colors — it asks, and it checks its work."
 
 ### Run the agent (7:00 - 7:15)
 
@@ -166,13 +166,13 @@ agy "build me a todo app with add, complete, and delete functionality. You MUST 
 
 "Watch for the MCP tool calls — you'll see it query `get_design_tokens` and `get_component_spec`. It's pulling our actual design system before writing any CSS. And once it's done building, it will launch a browser via Chrome DevTools, navigate to localhost, and take a screenshot to make sure everything rendered correctly."
 
-"This is where it gets powerful. Those MCP servers connect the AI to our real systems and tools — design tokens, testing runners, browser viewport. Any system your team uses can become a tool the AI queries or controls."
+"This is where it gets powerful. Those MCP servers connect Antigravity to our real systems and tools — design tokens, testing runners, browser viewport. Any system your team uses can become a tool Antigravity queries or controls."
 
 If agent is still going:
 
-"Think about what this means for your workflow. Your design team updates the design system, and every AI-assisted build automatically uses the latest tokens. No copy-pasting hex codes. No 'which blue are we using again?' The single source of truth is the MCP server."
+"Think about what this means for your workflow. Your design team updates the design system, and every Antigravity-assisted build automatically uses the latest tokens. No copy-pasting hex codes. No 'which blue are we using again?' The single source of truth is the MCP server."
 
-"And this isn't limited to design. You could have an MCP server that serves your API contract, so the AI generates correct fetch calls. Or one that serves your database schema, so it writes correct queries. The pattern is the same."
+"And this isn't limited to design. You could have an MCP server that serves your API contract, so Antigravity generates correct fetch calls. Or one that serves your database schema, so it writes correct queries. The pattern is the same."
 
 ### After it finishes (8:15 - 9:00)
 
@@ -235,9 +235,9 @@ Open the Cloud Run URL in the browser.
 
 "**Skills** — the specialists. On-demand expertise from your team, activated when needed."
 
-"**MCP** — the bridge. Connects the AI to your real systems — design tokens today, API schemas tomorrow."
+"**MCP** — the bridge. Connects Antigravity to your real systems — design tokens today, API schemas tomorrow."
 
-"The difference between AI-generated code and production code isn't the AI — it's what you give it to work with. Thanks."
+"The difference between Antigravity-generated code and production code isn't Antigravity — it's what you give it to work with. Thanks."
 
 ---
 

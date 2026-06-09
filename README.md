@@ -1,6 +1,6 @@
 # AI Coding Demo: From Yolo to Production
 
-A live demo showing how AI coding tools go from generating "slop" to production-quality code by progressively adding skills, plan mode, and MCP servers.
+A live demo showing how Antigravity coding tools go from generating "slop" to production-quality code by progressively adding skills, plan mode, and MCP servers.
 
 ## Quick Start
 
@@ -11,9 +11,9 @@ bun install
 
 ## Demo Script
 
-### Stage 1: The Yolo (~2-3 min)
+### Stage 1: Yolo (~2-3 min)
 
-No AI guidance. Just let it rip.
+No Antigravity guidance. Just let it rip.
 
 ```bash
 ./reset.sh 1
@@ -25,7 +25,7 @@ bun dev
 
 **Punchline:** "It works! But would you ship this?"
 
-### Stage 2: The Guided (~2-3 min)
+### Stage 2: Planning and Skills (~2-3 min)
 
 Add .antigravity.md as the conductor + two Antigravity CLI skills (frontend-engineer, test-engineer).
 
@@ -37,9 +37,9 @@ bun dev
 
 **Point out:** .antigravity.md orchestrates the workflow. Skills activate on demand — frontend-engineer for components/a11y, test-engineer for tests. Show the `.agents/skills/` directory.
 
-**Punchline:** ".antigravity.md is the conductor. Skills are the specialists. The AI activates the right expert at the right time."
+**Punchline:** ".antigravity.md is the conductor. Skills are the specialists. Antigravity activates the right expert at the right time."
 
-### Stage 3: The Production (~2-3 min)
+### Stage 3: MCP (~2-3 min)
 
 Add a design system MCP server and a Chrome DevTools MCP server. Skills now query real systems and verify UI visually.
 
@@ -51,7 +51,7 @@ bun dev
 
 **Point out:** Branded amber/stone palette, custom checkboxes, progress bar. The frontend-engineer skill queried the MCP server for design tokens, and visually verified the UI using Chrome DevTools.
 
-**Punchline:** "Three layers: .antigravity.md orchestrates, skills provide expertise, MCP connects to real systems. The AI didn't guess at colors — it asked, and then it verified the browser."
+**Punchline:** "Three layers: .antigravity.md orchestrates, skills provide expertise, MCP connects to real systems. Antigravity didn't guess at colors — it asked, and then it verified the browser."
 
 ### Stage 4: Deploy and Verify (~2-3 min)
 
