@@ -84,7 +84,7 @@ Once Stage 4 completes, use the following verified tests from our `deploy` skill
 ### Test 1: Brand Verification
 Verify the container serves your customized, polished design rather than the generic Next.js starting template:
 ```bash
-curl -s <YOUR_SERVICE_URL> | grep -q "What's on your plate?" && echo "✅ Brand check passed!" || echo "❌ Brand check failed!"
+curl -s <YOUR_SERVICE_URL> | grep -E -q "What's on your plate\?|What&#x27;s on your plate\?" && echo "✅ Brand check passed!" || echo "❌ Brand check failed!"
 ```
 
 ### Test 2: Asset Optimization Check
