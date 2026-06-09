@@ -12,7 +12,7 @@ if [ -z "$STAGE" ]; then
   echo ""
   echo "Stages:"
   echo "  1          Stage 1: Yolo mode (bare Next.js, no AI config)"
-  echo "  2          Stage 2: Skills + Plan mode (GEMINI.md)"
+  echo "  2          Stage 2: Skills + Plan mode (.antigravity.md)"
   echo "  3          Stage 3: MCP design system server"
   echo "  1-backup   Pre-generated Stage 1 output"
   echo "  2-backup   Pre-generated Stage 2 output"
@@ -72,13 +72,13 @@ echo ""
 
 case "$STAGE" in
   1)
-    echo "Prompt: gemini -y \"build me a todo app with add, complete, and delete functionality\""
+    echo "Prompt: agy --dangerously-skip-permissions \"build me a todo app with add, complete, and delete functionality\""
     ;;
   2)
-    echo "Prompt: gemini \"build me a todo app with add, complete, and delete functionality\""
+    echo "Prompt: agy \"build me a todo app with add, complete, and delete functionality\""
     ;;
   3)
-    echo "Prompt: gemini \"build me a todo app with add, complete, and delete functionality following our design system\""
+    echo "Prompt: agy \"build me a todo app with add, complete, and delete functionality following our design system\""
     ;;
   *-backup)
     echo "Run: bun dev"
