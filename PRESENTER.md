@@ -35,6 +35,6 @@ The same todo app with the same skills from Stage 2, but now the frontend-engine
 
 ## Key talking points
 
-"The AI didn't guess at colors — it asked. The MCP server is the bridge between your design team's decisions and the AI's output."
+"Antigravity didn't guess at colors — it asked. The MCP server is the bridge between your design team's decisions and Antigravity's output."
 
-"Three layers working together: .antigravity.md orchestrates the workflow, skills provide expert guidance, and MCP connects to your real systems. That's the difference between AI-generated code and AI-assisted production code."
+"Three layers working together: .antigravity.md orchestrates the workflow, skills provide expert guidance, and MCP connects to your real systems. That's the difference between Antigravity-generated code and Antigravity-assisted production code."
