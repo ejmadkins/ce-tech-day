@@ -25,10 +25,10 @@ Target: under 12 minutes. Times are approximate.
 ### Run the agent (1:00 - 1:15)
 
 ```bash
-agy --dangerously-skip-permissions "build me a todo app with add, complete, and delete functionality"
+agy --dangerously-skip-permissions --model "Gemini 3.5 Flash (Low)" -i "build me a todo app with add, complete, and delete functionality"
 ```
 
-"Notice the `-y` flag — that's yolo mode. It's going to auto-approve everything and just go."
+"Notice the `--dangerously-skip-permissions` and `-i` flags — that is our interactive 'yolo' launch. It's going to approve actions but let us interact as it works."
 
 ### [WHILE BUILDING] (1:15 - 2:15)
 
@@ -92,10 +92,10 @@ Open `.agents/skills/test-engineer/SKILL.md`:
 ### Run the agent (3:45 - 4:00)
 
 ```bash
-agy "build me a todo app with add, complete, and delete functionality"
+agy --dangerously-skip-permissions --model "Gemini 3.5 Flash (Low)" -i "build me a todo app with add, complete, and delete functionality"
 ```
 
-"Same prompt. No `-y` this time — we want it to plan first."
+"Notice we are still using our interactive flag, but now it's going to use our project guidelines to plan first before editing."
 
 ### [WHILE BUILDING] (4:00 - 5:15)
 
@@ -128,7 +128,7 @@ Quick tour:
 
 ---
 
-## Stage 3: MCP (6:00 - 9:00)
+## Stage 3: Interactive Alignment, Planning & Goals (6:00 - 9:00)
 
 ### Before running (6:00 - 7:00)
 
@@ -136,43 +136,35 @@ Quick tour:
 ./reset.sh 3
 ```
 
-"We've got great code now, but it still looks like every other Tailwind app. In production, you have a design system — brand colors, typography, spacing rules. How do you get Antigravity to follow it?"
+"We've got great, well-engineered code now. But in real life, engineering standards are only half the battle. A key part of engineering is *alignment*. Developers don't just write code from a single-line prompt; they co-create specifications with product managers, UX designers, and architects. How do we do that with an agent?"
 
-Open `.agents/mcp_config.json`:
-
-"MCP — Model Context Protocol. It lets Antigravity connect to external tools and systems. Here we've configured two MCP servers: one for our design system, and another for Chrome DevTools. This second server gives the agent eyes — it can run a browser, navigate to our local app, and take screenshots to visually inspect its work."
-
-Open `mcp-server/index.js` and scroll through:
-
-"This is a simple Node.js server that exposes two tools. `get_design_tokens` returns our color palette, typography, spacing — everything Antigravity needs to style components correctly. `get_component_spec` returns specific styling for buttons, cards, inputs, checkboxes."
-
-Point at the color values:
-
-"Amber primary, warm stone text, off-white background. This isn't Tailwind blue — this is our brand."
-
-Open `GEMINI.md`:
-
-"GEMINI.md now has two new steps in the workflow: query the design system before building, and visually verify the app in the browser after building. And the frontend-engineer skill tells the agent to always check the design tokens and then verify they look correct in the browser."
-
-"Antigravity doesn't guess at colors — it asks, and it checks its work."
+"That's where interactive alignment comes in. We can have Antigravity actively 'grill' us—asking clarifying questions, making architectural suggestions, and co-creating a structured design plan *before* executing the goals."
 
 ### Run the agent (7:00 - 7:15)
 
 ```bash
-agy "build me a todo app with add, complete, and delete functionality. You MUST query the design-system MCP server for all styling decisions"
+agy --dangerously-skip-permissions --model "Gemini 3.5 Flash (Low)" -i
 ```
 
-### [WHILE BUILDING] (7:15 - 8:15)
+"Notice we are launching an interactive CLI session with `-i`. This starts a real-time, bi-directional partnership."
 
-"Watch for the MCP tool calls — you'll see it query `get_design_tokens` and `get_component_spec`. It's pulling our actual design system before writing any CSS. And once it's done building, it will launch a browser via Chrome DevTools, navigate to localhost, and take a screenshot to make sure everything rendered correctly."
+### Interactive Alignment & Execution (7:15 - 8:15)
 
-"This is where it gets powerful. Those MCP servers connect Antigravity to our real systems and tools — design tokens, testing runners, browser viewport. Any system your team uses can become a tool Antigravity queries or controls."
+"Once inside, we prompt:"
+```text
+let's refine and improve our todo app by adding categories, priorities, due dates, and a stats dashboard
+```
 
-If agent is still going:
+"Watch how the agent responds. Instead of blindly writing code, it starts an interview. It asks about our schema, our category options, how we want to compute metrics, and our UI layout preferences."
 
-"Think about what this means for your workflow. Your design team updates the design system, and every Antigravity-assisted build automatically uses the latest tokens. No copy-pasting hex codes. No 'which blue are we using again?' The single source of truth is the MCP server."
+"This is a collaborative planning session. Once we agree and align, the agent co-creates a detailed architecture plan."
 
-"And this isn't limited to design. You could have an MCP server that serves your API contract, so Antigravity generates correct fetch calls. Or one that serves your database schema, so it writes correct queries. The pattern is the same."
+"Then we give it the green light to execute the aligned plan autonomously:"
+```text
+implement the detailed architecture plan we aligned on including categories, priorities, due dates, filters, and dynamic metrics, and verify with tests
+```
+
+"Now, the agent shifts into **Goal mode**. It executes the entire aligned plan autonomously, creating new components, custom hooks, and verifying every single change with a suite of automated unit tests."
 
 ### After it finishes (8:15 - 9:00)
 
@@ -180,12 +172,12 @@ If agent is still going:
 bun dev
 ```
 
-"Look at that. Warm amber palette, custom checkboxes, progress bar — this looks like it was built by a team with a style guide. Because it was."
+"Let's see what was generated."
 
-Quick visual comparison:
-- "Stage 1: generic, sloppy, one file"
-- "Stage 2: well-engineered, but still looks like a template"
-- "Stage 3: branded, polished, production-ready"
+Quick visual and code tour:
+- "Look at this UI: dynamic completion progress bar, filter chips for categories (Work, Personal, Shopping), urgent task indicators, and a beautiful stats dashboard summarizing our productivity!"
+- "Let's check the code: everything is modular, typed with TypeScript, fully responsive, and completely covered by unit tests!"
+- "This isn't just an app built from a generic prompt. It's a customized, production-grade productivity workstation co-designed with our agent."
 
 ---
 
@@ -204,7 +196,7 @@ Quick visual comparison:
 ### Run the agent (9:45 - 10:00)
 
 ```bash
-agy "deploy the app to google cloud run using the cloud-run mcp server, and then run tests to make sure everything is up and running as expected"
+agy --dangerously-skip-permissions --model "Gemini 3.5 Flash (Low)" -i "deploy our application to Cloud Run"
 ```
 
 ### [WHILE DEPLOYING] (10:00 - 11:00)
