@@ -126,4 +126,54 @@ describe("useTodos hook", () => {
     expect(result.current.todos.length).toBe(1);
     expect(result.current.todos[0].text).toBe("Task 2");
   });
+
+  test("should handle priority, categorization, and due dates", () => {
+    const { result } = renderHook(() => useTodos());
+
+    act(() => {
+      result.current.addTodo("Urgent server fix", "high", "Work", "2026-12-31");
+    });
+
+    const added = result.current.todos[0];
+    expect(added.text).toBe("Urgent server fix");
+    expect(added.priority).toBe("high");
+    expect(added.category).toBe("Work");
+    expect(added.dueDate).toBe("2026-12-31");
+  });
+
+  test("should filter and sort todos dynamically", () => {
+    const { result } = renderHook(() => useTodos());
+
+    act(() => {
+      result.current.addTodo("Bake cake", "low", "Personal");
+      result.current.addTodo("Submit report", "high", "Work");
+      result.current.addTodo("Buy fruits", "medium", "Shopping");
+    });
+
+    expect(result.current.todos.length).toBe(3);
+    expect(result.current.filteredTodos.length).toBe(3);
+
+    // Test priority sorting (high weight = 3, medium = 2, low = 1)
+    act(() => {
+      result.current.setSortBy("priority-desc");
+    });
+    expect(result.current.filteredTodos[0].text).toBe("Submit report"); // High
+    expect(result.current.filteredTodos[1].text).toBe("Buy fruits");    // Medium
+    expect(result.current.filteredTodos[2].text).toBe("Bake cake");     // Low
+
+    // Test category filter
+    act(() => {
+      result.current.setActiveCategory("Work");
+    });
+    expect(result.current.filteredTodos.length).toBe(1);
+    expect(result.current.filteredTodos[0].text).toBe("Submit report");
+
+    // Test text search
+    act(() => {
+      result.current.setActiveCategory(null);
+      result.current.setSearchQuery("Buy");
+    });
+    expect(result.current.filteredTodos.length).toBe(1);
+    expect(result.current.filteredTodos[0].text).toBe("Buy fruits");
+  });
 });
