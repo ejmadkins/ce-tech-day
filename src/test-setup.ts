@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars */
 import { GlobalWindow } from "happy-dom";
 
 // 1. Initialize happy-dom immediately BEFORE importing any testing library modules

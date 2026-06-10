@@ -10,6 +10,7 @@ export function useTodos() {
     const saved = localStorage.getItem("ce-tech-day-todos");
     if (saved) {
       try {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setTodos(JSON.parse(saved));
       } catch (e) {
         console.error("Failed to parse saved todos", e);
