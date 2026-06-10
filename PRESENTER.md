@@ -1,76 +1,111 @@
-# Stage 3: Interactive Alignment, Planning & Goals — Presenter Notes
+# Presenter Master Guide: "From Yolo to Production"
 
-## What you're looking at
-
-In this stage, we pivot away from the simple "code-generation" prompts of Stages 1 and 2 to demonstrate the true power of **Antigravity (`agy`)** as a full-fledged agentic engineering partner. 
-
-We showcase three key agentic capabilities:
-1. **Interactive Alignment (`-i` / Grill-Me)**: How `agy` interviews the developer to establish a precise product spec and design agreement instead of guessing.
-2. **Structured Planning (`/planning` skill)**: How `agy` generates a complete, checkable architectural blueprint before writing code.
-3. **Goal-Driven Execution (`/goal` skill)**: How `agy` autonomously executes the approved plan, modifies code, writes unit tests, and self-corrects any errors until the goal is fully accomplished.
+This master guide walks you through the comprehensive end-to-end setup and stage progression for the **"From Yolo to Production"** Next.js demo.
 
 ---
 
-## What changed from Stage 2
+## 🚀 Pre-Demo Setup (Essential)
 
-- **Active Collaboration**: No longer just executing one-off text prompts.
-- **Interactive Prompts**: Using `agy -i` to prompt a question-and-answer dialogue.
-- **Architectural Blueprints**: `stage_3_implementation_plan.md` featuring Mermaid system architecture diagrams, custom hooks, and state mappings.
-- **Advanced Core Application**: A beautifully crafted, premium, self-contained task workstation with categories, priorities, overdue warning highlights, custom filters, and a real-time productivity stats dashboard.
-- **High-Coverage Testing**: 20 comprehensive unit tests passing with zero errors.
+Before presenting, make sure your Google Cloud project is fully prepared. Running this script once ensures that all required APIs are active, IAM policies are correctly configured, and permission blockers (such as Cloud Build GCS access issues) are resolved.
+
+Run the setup script from the repository root:
+```bash
+./deploy.sh [YOUR_PROJECT_ID]
+```
+
+> [!NOTE]
+> * If no project ID is provided, the script automatically detects your active `gcloud` configuration project.
+> * This script is a **setup helper** to prepare the sandbox environment. During Stage 4 of the actual demo, you will show how to deploy and manage services elegantly using the **Cloud Run MCP server**.
 
 ---
 
-## Live Demo Flow & Script
+## 🎮 Stage-by-Stage Progression
 
-### 1. Reset and Show the Clean Stage
-- **Action**: Switch to Stage 3:
-  ```bash
-  ./reset.sh 3
+Each stage is mapped to a Git branch. You can reset to any stage instantly using the `./reset.sh` script:
+
+### Stage 1: Yolo Mode (Bare Next.js)
+* **Reset Command**: `./reset.sh 1` (or `./reset.sh 1-backup` for pre-generated code)
+* **Goal**: Prompt Antigravity to build a basic To-Do app with zero guardrails.
+* **Prompt**: 
+  ```text
+  agy --dangerously-skip-permissions --model "Gemini 3.5 Flash (Low)" -i "build me a todo app with add, complete, and delete functionality"
   ```
-- **Talk Track**:
-  > "We are starting Stage 3 clean. The reset script sets up the workspace and prints our target prompt. But instead of running a non-interactive `-p` command like we did before, we are going to start a dialogue."
+* **Key Talking Points**:
+  * Antigravity builds a single, large file with generic/plain styling.
+  * No component architecture, no strict types, and zero tests.
+  * Highlight the risk of "vibe-coding" without organizational standards.
 
-### 2. Trigger Interactive Alignment (`agy -i`)
-- **Action**: Run the interactive CLI:
-  ```bash
+---
+
+### Stage 2: Guided Mode (Skills + Plan)
+* **Reset Command**: `./reset.sh 2` (or `./reset.sh 2-backup` for pre-generated code)
+* **Goal**: Enable specialized guidelines (skills) and structured workflow planning.
+* **Prompt**: 
+  ```text
+  agy --dangerously-skip-permissions --model "Gemini 3.5 Flash (Low)" -i "build me a todo app with add, complete, and delete functionality"
+  ```
+* **Key Talking Points**:
+  * **Structured Plan**: The agent first generates an implementation plan (`GEMINI.md`) before writing any code.
+  * **Expert Guidance**: The agent uses the `frontend-engineer` skill for clean component separation and strict types, and the `test-engineer` skill for automatic unit test coverage.
+
+---
+
+### Stage 3: Interactive Alignment, Planning & Goals
+* **Reset Command**: `./reset.sh 3` (or `./reset.sh 3-backup` for pre-generated code)
+* **Goal**: Launch an interactive Q&A alignment session with Antigravity to refine requirements, co-create a detailed architecture plan, and execute it autonomously under Goal mode.
+* **Prompt**: 
+  ```text
   agy --dangerously-skip-permissions --model "Gemini 3.5 Flash (Low)" -i
   ```
-  Then type `/grill-me` or enter your prompt inside the chat to initiate the alignment interview.
-- **Talk Track**:
-  > "Notice how Antigravity doesn't just start spitting out code. It halts, analyzes the request, and starts grilling me. It asks: *'What default categories should we support?'*, *'How should we style overdue warnings?'*, and *'Do we need local storage migrations?'* 
-  > 
-  > This is **Interactive Alignment**. In a real-world project, this prevents alignment gaps and ensures the agent builds exactly what the developer intends."
+* **Interactive Steps**:
+  1. **Q&A Interactive Alignment**: Once inside the CLI, enter:
+     ```text
+     let's refine and improve our todo app by adding categories, priorities, due dates, and a stats dashboard
+     ```
+  2. **Goal Execution**: Once the plan is aligned and created, execute it:
+     ```text
+     implement the detailed architecture plan we aligned on including categories, priorities, due dates, filters, and dynamic metrics, and verify with tests
+     ```
+* **Key Talking Points**:
+  * **Interactive Alignment (Grill Me)**: The agent doesn't just guess requirements—it conducts an interactive interview to align on design decisions and scope.
+  * **Co-Created Plan**: It generates a structured architectural plan directly in partnership with the developer.
+  * **Autonomous Execution**: The agent translates the plan into a fully functional premium workstation with zero manual coding.
+  * **Premium Aesthetics**: It produces a stunning UI with status headers, completion progress bars, category filter chips, and interactive charts.
 
-### 3. The Blueprint Planning Phase
-- **Action**: Show the audience the plan file:
-  ```bash
-  cat stage_3_implementation_plan.md
-  ```
-- **Talk Track**:
-  > "Once we align on the answers, Antigravity generates an **Implementation Plan**. This isn't code yet; it's a structural blueprint. It contains a Mermaid diagram of the component hierarchy, hook state changes, and testing specifications. 
-  > 
-  > We approve the plan first. If we don't like the architecture, we change it here. It treats coding like a professional engineering practice, not a game of guess-and-check."
+---
 
-### 4. Goal-Driven Execution
-- **Action**: Run the execution loop in interactive mode:
-  ```bash
-  agy --dangerously-skip-permissions --model "Gemini 3.5 Flash (Low)" -i "implement the detailed architecture plan we aligned on including categories, priorities, due dates, filters, and dynamic metrics, and verify with tests"
+### Stage 4: Production Deployment (Cloud Run MCP Integration)
+* **Reset Command**: `./reset.sh 4` (or `./reset.sh 4-backup` for pre-generated code)
+* **Goal**: Provision, manage, and verify a Google Cloud Run service directly via the Cloud Run MCP server.
+* **Prompt**:
+  ```text
+  agy --dangerously-skip-permissions --model "Gemini 3.5 Flash (Low)" -i "deploy our application to Cloud Run"
   ```
-- **Talk Track**:
-  > "Now, Antigravity enters **Goal Execution** mode. It acts autonomously. It pulls in the `frontend-engineer` skill, modifies state, builds the `FilterBar` and `DashboardStats` components, and updates the unit tests.
-  > 
-  > If it makes a syntax mistake or a test fails, you will see it read the terminal output and **fix its own bugs** in real-time. It doesn't stop until the entire goal is met."
+* **Key Talking Points**:
+  * **Agent-Native Control**: No more running manual `gcloud` shell commands. The agent uses the `cloud-run` MCP server tools (like `list_services` and `deploy_service_from_image`) to manage infrastructure.
+  * **Deploy Skill**: The agent activates the `deploy` skill, providing robust architectural guidance on project discovery, image-to-service mapping, and automated post-deployment checks.
 
-### 5. Visual Wow & Proof of Correctness
-- **Action**: Run unit tests and start the dev server:
-  ```bash
-  bun test
-  bun dev
-  ```
-- **Talk Track**:
-  > "Let's run the tests. Look at that—20 out of 20 tests pass completely green! 
-  > 
-  > Now let's open `http://localhost:3000`. We have a fully featured, stunning Amber-themed workstation. We can add priorities, set due dates, watch overdue indicators alert us, filter by tags, and track our productivity in real-time. 
-  > 
-  > That is the power of Antigravity: interactive alignment, rigorous planning, and flawless autonomous execution."
+---
+
+## 🧪 Post-Deployment Verification Tests
+
+Once Stage 4 completes, use the following verified tests from our `deploy` skill to demonstrate a zero-friction deployment to the audience:
+
+### Test 1: Brand Verification
+Verify the container serves your customized, polished design rather than the generic Next.js starting template:
+```bash
+curl -s <YOUR_SERVICE_URL> | grep -E -q "What's on your plate\?|What&#x27;s on your plate\?" && echo "✅ Brand check passed!" || echo "❌ Brand check failed!"
+```
+
+### Test 2: Asset Optimization Check
+Verify that Turbopack / Next.js static assets and CSS files compile and resolve correctly:
+```bash
+curl -s <YOUR_SERVICE_URL> | grep -q "next/static" && echo "✅ Asset optimization check passed!" || echo "❌ Asset optimization check failed!"
+```
+
+### Test 3: Live Service Log Audit
+Directly query container logs from the MCP server to ensure zero node startup failures:
+1. Ask the agent: *"Show me the container startup logs for our service."*
+2. Verify the log returns:
+   * `✓ Ready in`
+   * `Starting production server...`
