@@ -142,7 +142,7 @@ const updateTodoTool = new FunctionTool({
 // Tool: Web Search (Simulated for robust live demo)
 const webSearchTool = new FunctionTool({
   name: "web_search",
-  description: "Searches the web for up-to-date facts, ideas, planning steps, low-carb recipes, or general information.",
+  description: "Searches the web for up-to-date facts, ideas, planning steps, low-carb or healthy recipes, or general information.",
   parameters: z.object({
     query: z.string().describe("The search query"),
   }),
@@ -153,7 +153,25 @@ const webSearchTool = new FunctionTool({
     const normalizedQuery = query.toLowerCase();
     let results = `Simulated search results for "${query}":\n\n`;
 
-    if (normalizedQuery.includes("low carb") || normalizedQuery.includes("keto") || normalizedQuery.includes("diet")) {
+    if (
+      normalizedQuery.includes("recipe") ||
+      normalizedQuery.includes("healthy") ||
+      normalizedQuery.includes("cook") ||
+      normalizedQuery.includes("food") ||
+      normalizedQuery.includes("meal") ||
+      normalizedQuery.includes("salad") ||
+      normalizedQuery.includes("dinner") ||
+      normalizedQuery.includes("lunch")
+    ) {
+      results += `1. **Lemon Herb Grilled Chicken Salad**: A vibrant, protein-packed option containing organic chicken breast, mixed greens, cherry tomatoes, cucumbers, avocado, and a dressing made of fresh lemon juice, extra virgin olive oil, and herbs.\n` +
+                 `2. **Quinoa and Roasted Vegetable Bowl**: A nutrient-dense, fiber-rich meal featuring cooked quinoa, roasted sweet potatoes, bell peppers, zucchini, red onions, and a creamy tahini dressing.\n` +
+                 `3. **Pan-Seared Salmon with Asparagus**: A heart-healthy dinner loaded with omega-3 fatty acids, featuring wild-caught salmon, oven-roasted asparagus spears, and a drizzle of garlic butter.\n` +
+                 `4. **Healthy Recipe Checklist & Action Items**: \n` +
+                 `   - Buy organic chicken breast and wild-caught salmon\n` +
+                 `   - Meal prep quinoa and roasted sweet potatoes\n` +
+                 `   - Purchase fresh greens, avocados, lemons, and asparagus\n` +
+                 `   - Chop vegetables for salad and roasting`;
+    } else if (normalizedQuery.includes("low carb") || normalizedQuery.includes("keto") || normalizedQuery.includes("diet")) {
       results += `1. **Top Low-Carb Foods**: Spinach, broccoli, avocados, eggs, chicken, salmon, and almonds.\n` +
                  `2. **Planning Guide**: Eliminate refined sugars, substitute grains with cauliflower rice, and focus on healthy fats.\n` +
                  `3. **Actionable Checklist**: \n` +
@@ -187,6 +205,16 @@ const webSearchTool = new FunctionTool({
   },
 });
 
+// Tool: Get/List Todos
+const getTodosTool = new FunctionTool({
+  name: "get_todos",
+  description: "Retrieves the user's current to-do list tasks, including their IDs, titles, completion status, priorities, categories, and due dates.",
+  parameters: z.object({}),
+  execute: async () => {
+    return { success: true, todos: tempTodos };
+  },
+});
+
 // Configure the ADK LlmAgent
 const todoAgent = new LlmAgent({
   name: "todo_agent",
@@ -194,16 +222,19 @@ const todoAgent = new LlmAgent({
   instruction: `You are a premium, helpful AI Task Assistant sidekick integrated directly into the user's To-Do list.
 Your mission is to help the user manage their tasks, categorize them, prioritize them, search the web to answer questions, and break down goals into concrete list items.
 
-You are equipped with tools to manipulate the user's todo list in-real-time:
+You are equipped with tools to manipulate and inspect the user's todo list in-real-time:
+- 'get_todos': Retrieve the current list of all todos with their statuses, priorities, categories, and due dates. Always call this tool first if the user asks to summarize tasks, break down high-priority tasks, or check what tasks are in the list!
 - 'add_todo': Add tasks. Call this multiple times to break down complex goals into subtasks!
 - 'complete_todo': Complete a task.
 - 'delete_todo': Remove a task.
 - 'update_todo': Edit task properties (priority, category, title, due dates).
 - 'web_search': Perform research for recipes, facts, lists, etc.
 
-When a user asks for something, first call 'web_search' if they need research. Then use 'add_todo', 'complete_todo', or other tools to adjust the list. You can call tools multiple times in a single response turn!
+When a user asks to summarize, inspect, or reference existing tasks, call 'get_todos' first to see the current list.
+When a user asks to break down high-priority items, first call 'get_todos' to find the high-priority tasks. If there are high-priority tasks, use 'add_todo' to add 3-4 structured subtasks/action items for each high-priority task, and set their priority appropriately. If there are no high-priority tasks, explain that and suggest creating one or breaking down another task.
+When a user asks for research or healthy recipes, call 'web_search' to get recipe details, and then you can add recipe-related tasks or ingredients as todos if requested.
 Always summarize what you did in your final text response. Be professional, cheerful, and precise.`,
-  tools: [addTodoTool, completeTodoTool, deleteTodoTool, updateTodoTool, webSearchTool],
+  tools: [addTodoTool, completeTodoTool, deleteTodoTool, updateTodoTool, webSearchTool, getTodosTool],
 });
 
 // POST endpoint handler
