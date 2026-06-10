@@ -17,6 +17,7 @@ export function useTodos() {
     Work: "#D97706",
     Personal: "#2563EB",
     Health: "#10B981",
+    Fitness: "#06B6D4",
     Shopping: "#DB2777",
   });
 
@@ -169,7 +170,7 @@ export function useTodos() {
     totalCount > 0 ? Math.round((completedCount / totalCount) * 100) : 0;
 
   // Dynamic Categories list derived from current tasks + static defaults
-  const defaultCategories = ["General", "Work", "Personal", "Health", "Shopping"];
+  const defaultCategories = ["General", "Work", "Personal", "Health", "Fitness", "Shopping"];
   const categories = Array.from(
     new Set([...defaultCategories, ...todos.map((t) => t.category)])
   );
