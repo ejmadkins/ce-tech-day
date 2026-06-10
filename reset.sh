@@ -111,10 +111,23 @@ if [ -f "mcp-server/package.json" ]; then
 fi
 
 # Automatically configure GenAI & Vertex AI environment variables for local runs and builds
-echo "Setting up local GenAI and Vertex credentials in .env..."
+echo ""
+echo "Configuring Vertex AI environment..."
+
+# Detect current gcloud project ID as default
+DEFAULT_PROJECT=$(gcloud config get-value project 2>/dev/null || true)
+if [ -z "$DEFAULT_PROJECT" ]; then
+  DEFAULT_PROJECT="ejmadkins-summit26-agy"
+fi
+
+# Prompt the presenter to confirm or override the project ID
+read -p "Enter Google Cloud Project ID [$DEFAULT_PROJECT]: " USER_PROJECT_ID
+PROJECT_ID=${USER_PROJECT_ID:-$DEFAULT_PROJECT}
+
+echo "Setting up local GenAI and Vertex credentials in .env using project: $PROJECT_ID..."
 cat <<EOF > .env
 GOOGLE_GENAI_USE_VERTEXAI=true
-GOOGLE_CLOUD_PROJECT=ejmadkins-summit26-agy
+GOOGLE_CLOUD_PROJECT=$PROJECT_ID
 GOOGLE_CLOUD_LOCATION=us-central1
 GEMINI_MODEL=gemini-2.5-flash
 EOF
