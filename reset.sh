@@ -97,7 +97,7 @@ case "$STAGE" in
     echo "Prompt: agy --dangerously-skip-permissions --model \"Gemini 3.5 Flash (Low)\" -i \"build me a todo app with add, complete, and delete functionality\""
     ;;
   3)
-    echo "Prompt: agy --dangerously-skip-permissions --model \"Gemini 3.5 Flash (Low)\" -i \"build me a todo app with add, complete, and delete functionality following our design system\""
+    echo "Prompt: agy --dangerously-skip-permissions --model \"Gemini 3.5 Flash (Low)\" -i"
     ;;
   4)
     echo "Prompt: agy --dangerously-skip-permissions --model \"Gemini 3.5 Flash (Low)\" -i \"deploy our application to Cloud Run\""
