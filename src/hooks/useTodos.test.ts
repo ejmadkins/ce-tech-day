@@ -176,4 +176,58 @@ describe("useTodos hook", () => {
     expect(result.current.filteredTodos.length).toBe(1);
     expect(result.current.filteredTodos[0].text).toBe("Buy fruits");
   });
+
+  test("should support custom category color updates", () => {
+    const { result } = renderHook(() => useTodos());
+    expect(result.current.categoryColors.Work).toBe("#D97706"); // Initial default color
+
+    act(() => {
+      result.current.updateCategoryColor("Work", "#FF0000");
+    });
+
+    expect(result.current.categoryColors.Work).toBe("#FF0000");
+  });
+
+  test("should reschedule a recurring task daily", () => {
+    const { result } = renderHook(() => useTodos());
+
+    act(() => {
+      result.current.addTodo("Daily workout", "medium", "Health", "2026-06-10", "daily");
+    });
+
+    expect(result.current.todos.length).toBe(1);
+    const id = result.current.todos[0].id;
+
+    act(() => {
+      result.current.toggleTodo(id);
+    });
+
+    // Toggle completes the old one AND spawns a new one for tomorrow!
+    expect(result.current.todos.length).toBe(2);
+    const pendingWorkout = result.current.todos.find(t => !t.completed);
+    expect(pendingWorkout).toBeDefined();
+    expect(pendingWorkout?.text).toBe("Daily workout");
+    expect(pendingWorkout?.dueDate).toBe("2026-06-11");
+    expect(pendingWorkout?.recurrence).toBe("daily");
+  });
+
+  test("should allow manual reordering of todos", () => {
+    const { result } = renderHook(() => useTodos());
+
+    act(() => {
+      result.current.addTodo("Task A");
+      result.current.addTodo("Task B");
+    });
+
+    // Task B is at index 0, Task A is at index 1 due to prepending
+    const idB = result.current.todos[0].id;
+    const idA = result.current.todos[1].id;
+
+    act(() => {
+      result.current.reorderTodos(idB, idA);
+    });
+
+    expect(result.current.todos[0].id).toBe(idA);
+    expect(result.current.todos[1].id).toBe(idB);
+  });
 });

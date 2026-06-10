@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Todo, Priority } from "../types";
+import { Todo, Priority, Recurrence } from "../types";
 
 export function useTodos() {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -9,7 +9,16 @@ export function useTodos() {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [activePriority, setActivePriority] = useState<Priority | null>(null);
-  const [sortBy, setSortBy] = useState<string>("date-desc");
+  const [sortBy, setSortBy] = useState<string>("manual"); // Default to manual/drag-and-drop for premium feel!
+
+  // Category Colors State
+  const [categoryColors, setCategoryColors] = useState<Record<string, string>>({
+    General: "#78716C",
+    Work: "#D97706",
+    Personal: "#2563EB",
+    Health: "#10B981",
+    Shopping: "#DB2777",
+  });
 
   // Load from localStorage on mount
   useEffect(() => {
@@ -25,6 +34,7 @@ export function useTodos() {
             priority: todo.priority || "low",
             category: todo.category || "General",
             dueDate: todo.dueDate || undefined,
+            recurrence: todo.recurrence || "none",
             createdAt: todo.createdAt || Date.now(),
           }));
           setTodos(migrated);
@@ -33,6 +43,16 @@ export function useTodos() {
         console.error("Failed to parse saved todos", e);
       }
     }
+
+    const savedColors = localStorage.getItem("ce-tech-day-category-colors");
+    if (savedColors) {
+      try {
+        setCategoryColors(JSON.parse(savedColors));
+      } catch (e) {
+        console.error("Failed to parse category colors", e);
+      }
+    }
+
     setIsHydrated(true);
   }, []);
 
@@ -43,14 +63,33 @@ export function useTodos() {
     }
   }, [todos, isHydrated]);
 
+  const updateCategoryColor = (category: string, color: string) => {
+    setCategoryColors((prev) => {
+      const next = { ...prev, [category]: color };
+      localStorage.setItem("ce-tech-day-category-colors", JSON.stringify(next));
+      return next;
+    });
+  };
+
   const addTodo = (
     text: string,
     priority: Priority = "low",
     category: string = "General",
-    dueDate?: string
+    dueDate?: string,
+    recurrence: Recurrence = "none"
   ) => {
     const trimmed = text.trim();
     if (!trimmed) return;
+    
+    // Ensure default color for new category if not already defined
+    const catName = category.trim() || "General";
+    if (!categoryColors[catName]) {
+      // Pick a semi-random elegant color if none exists
+      const colors = ["#8B5CF6", "#EC4899", "#3B82F6", "#14B8A6", "#F59E0B"];
+      const randomColor = colors[Math.floor(Math.random() * colors.length)];
+      updateCategoryColor(catName, randomColor);
+    }
+
     const newTodo: Todo = {
       id: typeof crypto !== "undefined" && crypto.randomUUID
         ? crypto.randomUUID()
@@ -58,19 +97,49 @@ export function useTodos() {
       text: trimmed,
       completed: false,
       priority,
-      category: category.trim() || "General",
+      category: catName,
       dueDate: dueDate || undefined,
+      recurrence,
       createdAt: Date.now(),
     };
     setTodos((prev) => [newTodo, ...prev]);
   };
 
   const toggleTodo = (id: string) => {
+    const todo = todos.find((t) => t.id === id);
+    if (!todo) return;
+
+    const nextCompleted = !todo.completed;
+
     setTodos((prev) =>
-      prev.map((todo) =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo
-      )
+      prev.map((t) => (t.id === id ? { ...t, completed: nextCompleted } : t))
     );
+
+    // If a recurring task is completed, schedule the next occurrence
+    if (nextCompleted && todo.recurrence && todo.recurrence !== "none") {
+      const baseline = todo.dueDate ? new Date(todo.dueDate) : new Date();
+      
+      // Prevent "Invalid Date" errors
+      const safeBaseline = isNaN(baseline.getTime()) ? new Date() : baseline;
+      const nextDue = new Date(safeBaseline);
+
+      if (todo.recurrence === "daily") {
+        nextDue.setDate(nextDue.getDate() + 1);
+      } else if (todo.recurrence === "weekly") {
+        nextDue.setDate(nextDue.getDate() + 7);
+      } else if (todo.recurrence === "monthly") {
+        nextDue.setMonth(nextDue.getMonth() + 1);
+      }
+
+      const formattedNextDue = nextDue.toISOString().split("T")[0];
+      addTodo(
+        todo.text,
+        todo.priority,
+        todo.category,
+        formattedNextDue,
+        todo.recurrence
+      );
+    }
   };
 
   const deleteTodo = (id: string) => {
@@ -79,6 +148,19 @@ export function useTodos() {
 
   const clearCompleted = () => {
     setTodos((prev) => prev.filter((todo) => !todo.completed));
+  };
+
+  const reorderTodos = (activeId: string, overId: string) => {
+    setTodos((prev) => {
+      const oldIndex = prev.findIndex((t) => t.id === activeId);
+      const newIndex = prev.findIndex((t) => t.id === overId);
+      if (oldIndex === -1 || newIndex === -1) return prev;
+
+      const result = Array.from(prev);
+      const [removed] = result.splice(oldIndex, 1);
+      result.splice(newIndex, 0, removed);
+      return result;
+    });
   };
 
   const totalCount = todos.length;
@@ -93,14 +175,15 @@ export function useTodos() {
   );
 
   // Computed Filtered & Sorted list
-  const filteredTodos = todos
-    .filter((todo) => {
-      const matchesSearch = todo.text.toLowerCase().includes(searchQuery.toLowerCase());
-      const matchesCategory = !activeCategory || todo.category === activeCategory;
-      const matchesPriority = !activePriority || todo.priority === activePriority;
-      return matchesSearch && matchesCategory && matchesPriority;
-    })
-    .sort((a, b) => {
+  const filteredTodos = todos.filter((todo) => {
+    const matchesSearch = todo.text.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesCategory = !activeCategory || todo.category === activeCategory;
+    const matchesPriority = !activePriority || todo.priority === activePriority;
+    return matchesSearch && matchesCategory && matchesPriority;
+  });
+
+  if (sortBy !== "manual") {
+    filteredTodos.sort((a, b) => {
       if (sortBy === "date-desc") {
         return b.createdAt - a.createdAt;
       }
@@ -118,6 +201,7 @@ export function useTodos() {
       }
       return 0;
     });
+  }
 
   return {
     todos,
@@ -139,5 +223,8 @@ export function useTodos() {
     setSearchQuery,
     sortBy,
     setSortBy,
+    categoryColors,
+    updateCategoryColor,
+    reorderTodos,
   };
 }

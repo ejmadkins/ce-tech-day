@@ -30,6 +30,9 @@ export default function Home() {
     setSearchQuery,
     sortBy,
     setSortBy,
+    categoryColors,
+    updateCategoryColor,
+    reorderTodos,
   } = useTodos();
 
   return (
@@ -44,11 +47,15 @@ export default function Home() {
 
           {/* 2. Stats & Analytics Panel */}
           {isHydrated && (
-            <DashboardStats todos={todos} />
+            <DashboardStats todos={todos} categoryColors={categoryColors} />
           )}
 
           {/* 3. Task Input Composer */}
-          <TodoInput onAddTodo={addTodo} />
+          <TodoInput
+            onAddTodo={addTodo}
+            categoryColors={categoryColors}
+            onUpdateCategoryColor={updateCategoryColor}
+          />
 
           {/* 4. Filters, Searches, and Sorts */}
           {isHydrated && totalCount > 0 && (
@@ -62,6 +69,7 @@ export default function Home() {
               onChangeSearch={setSearchQuery}
               sortBy={sortBy}
               onChangeSort={setSortBy}
+              categoryColors={categoryColors}
             />
           )}
 
@@ -83,6 +91,9 @@ export default function Home() {
                 todos={filteredTodos}
                 onToggle={toggleTodo}
                 onDelete={deleteTodo}
+                categoryColors={categoryColors}
+                sortBy={sortBy}
+                onReorder={reorderTodos}
               />
 
               {/* List Footer metadata and clean up */}

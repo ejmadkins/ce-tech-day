@@ -13,6 +13,7 @@ interface FilterBarProps {
   onChangeSearch: (query: string) => void;
   sortBy: string;
   onChangeSort: (criteria: string) => void;
+  categoryColors?: Record<string, string>;
 }
 
 export function FilterBar({
@@ -25,9 +26,10 @@ export function FilterBar({
   onChangeSearch,
   sortBy,
   onChangeSort,
+  categoryColors = {},
 }: FilterBarProps) {
   return (
-    <div className="flex flex-col gap-4 w-full bg-white border border-neutral-200 rounded-xl p-4 shadow-sm">
+    <div className="flex flex-col gap-4 w-full bg-white border border-neutral-200 rounded-2xl p-5 shadow-sm">
       {/* Search Input */}
       <div className="relative">
         <input
@@ -35,11 +37,11 @@ export function FilterBar({
           value={searchQuery}
           onChange={(e) => onChangeSearch(e.target.value)}
           placeholder="Search tasks..."
-          className="w-full bg-neutral-50 border border-neutral-300 text-neutral-900 rounded-lg pl-10 pr-4 py-2 text-sm placeholder-neutral-400 focus:outline-none focus:border-primary-500 custom-input-focus transition duration-150 ease"
+          className="w-full bg-neutral-50 border border-neutral-300 text-neutral-900 rounded-xl pl-10 pr-4 py-2.5 text-sm placeholder-neutral-400 focus:outline-none focus:border-primary-500 custom-input-focus transition duration-150 ease"
           aria-label="Search tasks"
         />
         <svg
-          className="absolute left-3.5 top-2.5 w-4 h-4 text-neutral-400"
+          className="absolute left-3.5 top-3 w-4 h-4 text-neutral-400"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -61,7 +63,7 @@ export function FilterBar({
         <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
           <button
             onClick={() => onSelectCategory(null)}
-            className={`text-xs font-semibold px-3 py-1.5 rounded-full transition-all duration-150 whitespace-nowrap cursor-pointer ${
+            className={`text-xs font-semibold px-3.5 py-2 rounded-full transition-all duration-150 whitespace-nowrap cursor-pointer flex items-center gap-1.5 ${
               activeCategory === null
                 ? "bg-primary-500 text-white shadow-sm"
                 : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200"
@@ -69,19 +71,27 @@ export function FilterBar({
           >
             All
           </button>
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => onSelectCategory(cat)}
-              className={`text-xs font-semibold px-3 py-1.5 rounded-full transition-all duration-150 whitespace-nowrap cursor-pointer ${
-                activeCategory === cat
-                  ? "bg-primary-500 text-white shadow-sm"
-                  : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200"
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
+          {categories.map((cat) => {
+            const catColor = categoryColors[cat] || "#78716C";
+            return (
+              <button
+                key={cat}
+                onClick={() => onSelectCategory(cat)}
+                className={`text-xs font-semibold px-3.5 py-2 rounded-full transition-all duration-150 whitespace-nowrap cursor-pointer flex items-center gap-1.5 ${
+                  activeCategory === cat
+                    ? "bg-primary-500 text-white shadow-sm"
+                    : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200"
+                }`}
+              >
+                {/* Dot indicator */}
+                <span
+                  className="w-2.5 h-2.5 rounded-full border border-white/20"
+                  style={{ backgroundColor: catColor }}
+                />
+                {cat}
+              </button>
+            );
+          })}
         </div>
       </div>
 
@@ -96,15 +106,15 @@ export function FilterBar({
             {(["low", "medium", "high"] as const).map((pri) => {
               const isActive = activePriority === pri;
               const priColors = {
-                low: isActive ? "bg-stone-500 text-white" : "bg-neutral-100 text-stone-600 hover:bg-neutral-200",
-                medium: isActive ? "bg-amber-500 text-white" : "bg-neutral-100 text-amber-700 hover:bg-neutral-200",
-                high: isActive ? "bg-red-500 text-white" : "bg-neutral-100 text-red-600 hover:bg-neutral-200",
+                low: isActive ? "bg-stone-550 text-white shadow-sm" : "bg-neutral-150 text-stone-600 hover:bg-neutral-200",
+                medium: isActive ? "bg-amber-550 text-white shadow-sm" : "bg-neutral-150 text-amber-700 hover:bg-neutral-200",
+                high: isActive ? "bg-red-550 text-white shadow-sm" : "bg-neutral-150 text-red-600 hover:bg-neutral-200",
               };
               return (
                 <button
                   key={pri}
                   onClick={() => onSelectPriority(isActive ? null : pri)}
-                  className={`text-[0.7rem] font-bold uppercase tracking-wider px-2 py-1 rounded cursor-pointer transition-all duration-150 ${priColors[pri]}`}
+                  className={`text-[0.7rem] font-bold uppercase tracking-wider px-2.5 py-1.5 rounded cursor-pointer transition-all duration-150 ${priColors[pri]}`}
                 >
                   {pri}
                 </button>
@@ -121,9 +131,10 @@ export function FilterBar({
           <select
             value={sortBy}
             onChange={(e) => onChangeSort(e.target.value)}
-            className="bg-neutral-100 text-neutral-700 border border-neutral-300 rounded px-2 py-1 text-xs font-semibold focus:outline-none focus:border-primary-500 transition cursor-pointer"
+            className="bg-neutral-100 text-neutral-700 border border-neutral-300 rounded-lg px-2.5 py-1.5 text-xs font-semibold focus:outline-none focus:border-primary-500 transition cursor-pointer"
             aria-label="Sort options"
           >
+            <option value="manual">Manual (Drag & Drop)</option>
             <option value="date-desc">Newest First</option>
             <option value="date-asc">Oldest First</option>
             <option value="priority-desc">High Priority First</option>

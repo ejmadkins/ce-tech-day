@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { Todo } from "../types";
 import { TodoItem } from "./TodoItem";
 
@@ -8,9 +8,42 @@ interface TodoListProps {
   todos: Todo[];
   onToggle: (id: string) => void;
   onDelete: (id: string) => void;
+  categoryColors?: Record<string, string>;
+  sortBy?: string;
+  onReorder?: (activeId: string, overId: string) => void;
 }
 
-export function TodoList({ todos, onToggle, onDelete }: TodoListProps) {
+export function TodoList({
+  todos,
+  onToggle,
+  onDelete,
+  categoryColors = {},
+  sortBy = "date-desc",
+  onReorder,
+}: TodoListProps) {
+  const [draggedId, setDraggedId] = useState<string | null>(null);
+
+  const handleDragStart = (e: React.DragEvent, id: string) => {
+    setDraggedId(id);
+    e.dataTransfer.effectAllowed = "move";
+    e.dataTransfer.setData("text/plain", id);
+  };
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+  };
+
+  const handleDrop = (e: React.DragEvent, targetId: string) => {
+    e.preventDefault();
+    if (draggedId && draggedId !== targetId && onReorder) {
+      onReorder(draggedId, targetId);
+    }
+  };
+
+  const handleDragEnd = () => {
+    setDraggedId(null);
+  };
+
   if (todos.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center py-12 px-4 border-2 border-dashed border-neutral-300 rounded-2xl bg-neutral-50/50 text-center transition-all duration-200">
@@ -22,7 +55,7 @@ export function TodoList({ todos, onToggle, onDelete }: TodoListProps) {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-8 h-8"
+            className="w-8 h-8 animate-pulse"
           >
             <path
               strokeLinecap="round"
@@ -44,12 +77,24 @@ export function TodoList({ todos, onToggle, onDelete }: TodoListProps) {
   return (
     <ul className="flex flex-col gap-3" aria-label="Task list">
       {todos.map((todo) => (
-        <TodoItem
+        <div
           key={todo.id}
-          todo={todo}
-          onToggle={onToggle}
-          onDelete={onDelete}
-        />
+          className={`transition-opacity duration-150 ${
+            draggedId === todo.id ? "opacity-40" : "opacity-100"
+          }`}
+        >
+          <TodoItem
+            todo={todo}
+            onToggle={onToggle}
+            onDelete={onDelete}
+            categoryColors={categoryColors}
+            sortBy={sortBy}
+            onDragStart={handleDragStart}
+            onDragOver={handleDragOver}
+            onDrop={handleDrop}
+            onDragEnd={handleDragEnd}
+          />
+        </div>
       ))}
     </ul>
   );
