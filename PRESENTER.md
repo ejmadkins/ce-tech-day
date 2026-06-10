@@ -32,10 +32,11 @@ We showcase three key agentic capabilities:
   > "We are starting Stage 3 clean. The reset script sets up the workspace and prints our target prompt. But instead of running a non-interactive `-p` command like we did before, we are going to start a dialogue."
 
 ### 2. Trigger Interactive Alignment (`agy -i`)
-- **Action**: Run the interactive prompt:
+- **Action**: Run the interactive CLI:
   ```bash
-  agy -i "let's refine and improve our todo app by adding categories, priorities, due dates, and a stats dashboard"
+  agy --dangerously-skip-permissions --model "Gemini 3.5 Flash (Low)" -i
   ```
+  Then type `/grill-me` or enter your prompt inside the chat to initiate the alignment interview.
 - **Talk Track**:
   > "Notice how Antigravity doesn't just start spitting out code. It halts, analyzes the request, and starts grilling me. It asks: *'What default categories should we support?'*, *'How should we style overdue warnings?'*, and *'Do we need local storage migrations?'* 
   > 
@@ -52,9 +53,9 @@ We showcase three key agentic capabilities:
   > We approve the plan first. If we don't like the architecture, we change it here. It treats coding like a professional engineering practice, not a game of guess-and-check."
 
 ### 4. Goal-Driven Execution
-- **Action**: Run/show the execution loop:
+- **Action**: Run the execution loop in interactive mode:
   ```bash
-  agy -p "implement the detailed architecture plan we aligned on including categories, priorities, due dates, filters, and dynamic metrics, and verify with tests"
+  agy --dangerously-skip-permissions --model "Gemini 3.5 Flash (Low)" -i "implement the detailed architecture plan we aligned on including categories, priorities, due dates, filters, and dynamic metrics, and verify with tests"
   ```
 - **Talk Track**:
   > "Now, Antigravity enters **Goal Execution** mode. It acts autonomously. It pulls in the `frontend-engineer` skill, modifies state, builds the `FilterBar` and `DashboardStats` components, and updates the unit tests.
