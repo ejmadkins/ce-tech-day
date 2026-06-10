@@ -45,7 +45,7 @@ Each stage is mapped to a Git branch. You can reset to any stage instantly using
   agy "build me a todo app with add, complete, and delete functionality"
   ```
 * **Key Talking Points**:
-  * **Structured Plan**: The agent first generates an implementation plan (`.antigravity.md`) before writing any code.
+  * **Structured Plan**: The agent first generates an implementation plan (`GEMINI.md`) before writing any code.
   * **Expert Guidance**: The agent uses the `frontend-engineer` skill for clean component separation and strict types, and the `test-engineer` skill for automatic unit test coverage.
 
 ---

@@ -20,7 +20,7 @@ Target: under 12 minutes. Times are approximate.
 ./reset.sh 1
 ```
 
-"No .antigravity.md, no skills, no configuration. Just a blank canvas and a prompt."
+"No GEMINI.md, no skills, no configuration. Just a blank canvas and a prompt."
 
 ### Run the agent (1:00 - 1:15)
 
@@ -71,9 +71,9 @@ Open `src/app/page.tsx` and point out:
 
 "Same starting point, but now we've added two things."
 
-Open `.antigravity.md`:
+Open `GEMINI.md`:
 
-"First, .antigravity.md — this is always-on project context. Think of it as the conductor. It tells Antigravity: here's our project structure, and here's the workflow — plan first, then build components using the frontend-engineer skill, then write tests using the test-engineer skill."
+"First, GEMINI.md — this is always-on project context. Think of it as the conductor. It tells Antigravity: here's our project structure, and here's the workflow — plan first, then build components using the frontend-engineer skill, then write tests using the test-engineer skill."
 
 Open `.agents/skills/` directory:
 
@@ -150,9 +150,9 @@ Point at the color values:
 
 "Amber primary, warm stone text, off-white background. This isn't Tailwind blue — this is our brand."
 
-Open `.antigravity.md`:
+Open `GEMINI.md`:
 
-".antigravity.md now has two new steps in the workflow: query the design system before building, and visually verify the app in the browser after building. And the frontend-engineer skill tells the agent to always check the design tokens and then verify they look correct in the browser."
+"GEMINI.md now has two new steps in the workflow: query the design system before building, and visually verify the app in the browser after building. And the frontend-engineer skill tells the agent to always check the design tokens and then verify they look correct in the browser."
 
 "Antigravity doesn't guess at colors — it asks, and it checks its work."
 
@@ -231,7 +231,7 @@ Open the Cloud Run URL in the browser.
 
 "Three layers, same prompt, three very different results:"
 
-"**.antigravity.md** — the conductor. Always-on project context that defines your workflow."
+"**GEMINI.md** — the conductor. Always-on project context that defines your workflow."
 
 "**Skills** — the specialists. On-demand expertise from your team, activated when needed."
 

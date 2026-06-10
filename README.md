@@ -27,7 +27,7 @@ bun dev
 
 ### Stage 2: Planning and Skills (~2-3 min)
 
-Add .antigravity.md as the conductor + two Antigravity CLI skills (frontend-engineer, test-engineer).
+Add GEMINI.md as the conductor + two Antigravity CLI skills (frontend-engineer, test-engineer).
 
 ```bash
 ./reset.sh 2
@@ -35,9 +35,9 @@ agy "build me a todo app with add, complete, and delete functionality"
 bun dev
 ```
 
-**Point out:** .antigravity.md orchestrates the workflow. Skills activate on demand — frontend-engineer for components/a11y, test-engineer for tests. Show the `.agents/skills/` directory.
+**Point out:** GEMINI.md orchestrates the workflow. Skills activate on demand — frontend-engineer for components/a11y, test-engineer for tests. Show the `.agents/skills/` directory.
 
-**Punchline:** ".antigravity.md is the conductor. Skills are the specialists. Antigravity activates the right expert at the right time."
+**Punchline:** "GEMINI.md is the conductor. Skills are the specialists. Antigravity activates the right expert at the right time."
 
 ### Stage 3: MCP (~2-3 min)
 
@@ -51,7 +51,7 @@ bun dev
 
 **Point out:** Branded amber/stone palette, custom checkboxes, progress bar. The frontend-engineer skill queried the MCP server for design tokens, and visually verified the UI using Chrome DevTools.
 
-**Punchline:** "Three layers: .antigravity.md orchestrates, skills provide expertise, MCP connects to real systems. Antigravity didn't guess at colors — it asked, and then it verified the browser."
+**Punchline:** "Three layers: GEMINI.md orchestrates, skills provide expertise, MCP connects to real systems. Antigravity didn't guess at colors — it asked, and then it verified the browser."
 
 ### Stage 4: Deploy and Verify (~2-3 min)
 
@@ -86,9 +86,9 @@ Each backup branch includes a `PRESENTER.md` with talking points.
 |--------|----------|
 | `main` | This README + reset script |
 | `stage-1-yolo` | Bare Next.js boilerplate |
-| `stage-2-skills` | Boilerplate + .antigravity.md + `.agents/skills/` (frontend-engineer, test-engineer) |
-| `stage-3-mcp` | Boilerplate + .antigravity.md + skills + MCP design system server |
-| `stage-4-deploy` | Boilerplate + .antigravity.md + skills + MCP servers + setup for Cloud Run deployment |
+| `stage-2-skills` | Boilerplate + GEMINI.md + `.agents/skills/` (frontend-engineer, test-engineer) |
+| `stage-3-mcp` | Boilerplate + GEMINI.md + skills + MCP design system server |
+| `stage-4-deploy` | Boilerplate + GEMINI.md + skills + MCP servers + setup for Cloud Run deployment |
 | `stage-1-backup` | Pre-generated yolo output |
 | `stage-2-backup` | Pre-generated skills output |
 | `stage-3-backup` | Pre-generated MCP output |
