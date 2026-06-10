@@ -17,7 +17,7 @@ No Antigravity guidance. Just let it rip.
 
 ```bash
 ./reset.sh 1
-agy --dangerously-skip-permissions --model "gemini-2.5-flash" -i "build me a todo app with add, complete, and delete functionality"
+agy --dangerously-skip-permissions --model "Gemini 3.5 Flash (Low)" -i "build me a todo app with add, complete, and delete functionality"
 bun dev
 ```
 
@@ -33,7 +33,7 @@ Add GEMINI.md as the conductor + two Antigravity CLI skills (frontend-engineer, 
 
 ```bash
 ./reset.sh 2
-agy --dangerously-skip-permissions --model "gemini-2.5-flash" -i "build me a todo app with add, complete, and delete functionality"
+agy --dangerously-skip-permissions --model "Gemini 3.5 Flash (Low)" -i "build me a todo app with add, complete, and delete functionality"
 bun dev
 ```
 
@@ -49,7 +49,7 @@ Conduct an interactive alignment session with the agent to co-design and autonom
 
 ```bash
 ./reset.sh 3
-agy --dangerously-skip-permissions --model "gemini-2.5-flash" -i
+agy --dangerously-skip-permissions --model "Gemini 3.5 Flash (Low)" -i
 ```
 
 **Inside the CLI session:**
@@ -74,7 +74,7 @@ Deploy the application to Google Cloud Run using the Cloud Run MCP server and ru
 
 ```bash
 ./reset.sh 4
-agy --dangerously-skip-permissions --model "gemini-2.5-flash" -i "deploy our application to Cloud Run"
+agy --dangerously-skip-permissions --model "Gemini 3.5 Flash (Low)" -i "deploy our application to Cloud Run"
 ```
 
 **Point out:** The agent provisions infrastructure and pushes the container using the native `cloud-run` MCP server tools. It then tests the live deployment URL to verify the service is running.

@@ -25,7 +25,7 @@ Target: under 12 minutes. Times are approximate.
 ### Run the agent (1:00 - 1:15)
 
 ```bash
-agy --dangerously-skip-permissions --model "gemini-2.5-flash" -i "build me a todo app with add, complete, and delete functionality"
+agy --dangerously-skip-permissions --model "Gemini 3.5 Flash (Low)" -i "build me a todo app with add, complete, and delete functionality"
 ```
 
 "Notice the `--dangerously-skip-permissions` and `-i` flags — that is our interactive 'yolo' launch. It's going to approve actions but let us interact as it works."
@@ -92,7 +92,7 @@ Open `.agents/skills/test-engineer/SKILL.md`:
 ### Run the agent (3:45 - 4:00)
 
 ```bash
-agy --dangerously-skip-permissions --model "gemini-2.5-flash" -i "build me a todo app with add, complete, and delete functionality"
+agy --dangerously-skip-permissions --model "Gemini 3.5 Flash (Low)" -i "build me a todo app with add, complete, and delete functionality"
 ```
 
 "Notice we are still using our interactive flag, but now it's going to use our project guidelines to plan first before editing."
@@ -143,7 +143,7 @@ Quick tour:
 ### Run the agent (7:00 - 7:15)
 
 ```bash
-agy --dangerously-skip-permissions --model "gemini-2.5-flash" -i
+agy --dangerously-skip-permissions --model "Gemini 3.5 Flash (Low)" -i
 ```
 
 "Notice we are launching an interactive CLI session with `-i`. This starts a real-time, bi-directional partnership."
@@ -196,7 +196,7 @@ Quick visual and code tour:
 ### Run the agent (9:45 - 10:00)
 
 ```bash
-agy --dangerously-skip-permissions --model "gemini-2.5-flash" -i "deploy our application to Cloud Run"
+agy --dangerously-skip-permissions --model "Gemini 3.5 Flash (Low)" -i "deploy our application to Cloud Run"
 ```
 
 ### [WHILE DEPLOYING] (10:00 - 11:00)
