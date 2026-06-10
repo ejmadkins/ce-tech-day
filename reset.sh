@@ -12,7 +12,7 @@ if [ -z "$STAGE" ]; then
   echo ""
   echo "Stages:"
   echo "  1          Stage 1: Yolo mode (bare Next.js, no AI config)"
-  echo "  2          Stage 2: Skills + Plan mode (.antigravity.md)"
+  echo "  2          Stage 2: Skills + Plan mode (GEMINI.md)"
   echo "  3          Stage 3: Interactive Alignment, Planning & Goals"
   echo "  4          Stage 4: Cloud Run Deployment"
   echo "  1-backup   Pre-generated Stage 1 output"
