@@ -29,14 +29,16 @@ Before provisioning, inspect the existing environment using MCP tools to avoid c
 2. Retrieve the active configuration of any existing instance with `get_service`.
 
 ### Step 2: Source Code Packaging & Deployment
-Since our application is vibe-coded locally:
-1. Verify the project compiled successfully locally using `bun run build`.
-2. Initiate deployment. (If deploying from source, ensure the buildpack triggers a Next.js production build using Bun).
+Since our application is developed locally:
+1. Verify the project compiles successfully locally by running `bun run build`.
+2. Do NOT run manual `gcloud run deploy` shell commands. Instead, use the `deploy_local_folder` tool from the `cloud-run` MCP server to deploy the local folder (`/home/user/projects/ce-tech-day`) directly to Cloud Run.
+3. Call the `deploy_local_folder` tool with the absolute path, target project ID, region `us-central1`, and service name `todo-app`.
 
 ### Step 3: Deployment Monitoring & Details
-1. Monitor the service until it changes to a ready/serving state.
+1. Monitor the service deployment until it succeeds and reports a ready/serving state.
 2. Call `get_service` to extract the live, active `uri` of the service.
-3. Call `get_service_log` with a limit of `50` to verify the container startup logs are healthy.
+3. Call `get_service_log` with a limit of `50` to verify the container startup logs are healthy and print them.
+
 
 ---
 
