@@ -12,7 +12,7 @@ export function TaskHeader() {
       </div>
       <div className="flex flex-col gap-1">
         <h1 className="text-3xl font-extrabold text-neutral-900 tracking-tight">
-          What&apos;s on your plate?
+          What's on your plate?
         </h1>
         <p className="text-sm text-neutral-500">
           Simplify your day, build habits, and conquer your goals.
