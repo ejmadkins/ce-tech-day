@@ -1,40 +1,75 @@
-# Stage 3: MCP Design System — Presenter Notes
+# Stage 3: Interactive Alignment, Planning & Goals — Presenter Notes
 
 ## What you're looking at
 
-The same todo app with the same skills from Stage 2, but now the frontend-engineer skill queries a design system MCP server before making any styling decisions.
+In this stage, we pivot away from the simple "code-generation" prompts of Stages 1 and 2 to demonstrate the true power of **Antigravity (`agy`)** as a full-fledged agentic engineering partner. 
+
+We showcase three key agentic capabilities:
+1. **Interactive Alignment (`-i` / Grill-Me)**: How `agy` interviews the developer to establish a precise product spec and design agreement instead of guessing.
+2. **Structured Planning (`/planning` skill)**: How `agy` generates a complete, checkable architectural blueprint before writing code.
+3. **Goal-Driven Execution (`/goal` skill)**: How `agy` autonomously executes the approved plan, modifies code, writes unit tests, and self-corrects any errors until the goal is fully accomplished.
+
+---
 
 ## What changed from Stage 2
 
-- **MCP servers**:
-  - **Design System** (`mcp-server/index.js`) — serves design tokens and component specs via `get_design_tokens` and `get_component_spec` tools.
-  - **Chrome DevTools** (`chrome-devtools-mcp`) — allows the agent to launch/control the browser and visually verify UI changes.
-- **.antigravity.md** — adds design system queries as step 2 and visual verification via browser as step 5 in the workflow.
-- **Frontend-engineer skill** — updated to always query the design-system MCP before choosing colors, spacing, or styles.
-- **`.agents/mcp_config.json`** — configures the MCP server connections.
+- **Active Collaboration**: No longer just executing one-off text prompts.
+- **Interactive Prompts**: Using `agy -i` to prompt a question-and-answer dialogue.
+- **Architectural Blueprints**: `stage_3_implementation_plan.md` featuring Mermaid system architecture diagrams, custom hooks, and state mappings.
+- **Advanced Core Application**: A beautifully crafted, premium, self-contained task workstation with categories, priorities, overdue warning highlights, custom filters, and a real-time productivity stats dashboard.
+- **High-Coverage Testing**: 20 comprehensive unit tests passing with zero errors.
 
-## Visual result
+---
 
-- Warm amber/stone palette — immediately recognizable as "not default Tailwind"
-- Amber-tinted background (`#FFFBEB`)
-- Custom checkbox with amber check and animated SVG
-- Progress bar showing completion percentage
-- "Task Manager" badge in the header
-- Delete buttons fade in on hover (opacity transition)
-- Dashed border empty state with clipboard icon
-- Everything feels cohesive and intentional
+## Live Demo Flow & Script
 
-## Code improvements to point out
+### 1. Reset and Show the Clean Stage
+- **Action**: Switch to Stage 3:
+  ```bash
+  ./reset.sh 3
+  ```
+- **Talk Track**:
+  > "We are starting Stage 3 clean. The reset script sets up the workspace and prints our target prompt. But instead of running a non-interactive `-p` command like we did before, we are going to start a dialogue."
 
-1. **Same structure as Stage 2** — the code architecture didn't change
-2. **Design tokens applied** — amber-500 primary, stone text colors, amber-50 background
-3. **Polished interactions** — hover reveals, progress animations, focus rings in amber
-4. **Custom checkbox** — SVG checkmark, amber-500 fill, proper ARIA role
-5. **Progress bar** — visual indicator of completion with smooth transitions
-6. **Brand personality** — "What's on your plate?" heading, Task Manager badge
+### 2. Trigger Interactive Alignment (`agy -i`)
+- **Action**: Run the interactive prompt:
+  ```bash
+  agy -i "let's refine and improve our todo app by adding categories, priorities, due dates, and a stats dashboard"
+  ```
+- **Talk Track**:
+  > "Notice how Antigravity doesn't just start spitting out code. It halts, analyzes the request, and starts grilling me. It asks: *'What default categories should we support?'*, *'How should we style overdue warnings?'*, and *'Do we need local storage migrations?'* 
+  > 
+  > This is **Interactive Alignment**. In a real-world project, this prevents alignment gaps and ensures the agent builds exactly what the developer intends."
 
-## Key talking points
+### 3. The Blueprint Planning Phase
+- **Action**: Show the audience the plan file:
+  ```bash
+  cat stage_3_implementation_plan.md
+  ```
+- **Talk Track**:
+  > "Once we align on the answers, Antigravity generates an **Implementation Plan**. This isn't code yet; it's a structural blueprint. It contains a Mermaid diagram of the component hierarchy, hook state changes, and testing specifications. 
+  > 
+  > We approve the plan first. If we don't like the architecture, we change it here. It treats coding like a professional engineering practice, not a game of guess-and-check."
 
-"Antigravity didn't guess at colors — it asked. The MCP server is the bridge between your design team's decisions and Antigravity's output."
+### 4. Goal-Driven Execution
+- **Action**: Run/show the execution loop:
+  ```bash
+  agy -p "implement the detailed architecture plan we aligned on including categories, priorities, due dates, filters, and dynamic metrics, and verify with tests"
+  ```
+- **Talk Track**:
+  > "Now, Antigravity enters **Goal Execution** mode. It acts autonomously. It pulls in the `frontend-engineer` skill, modifies state, builds the `FilterBar` and `DashboardStats` components, and updates the unit tests.
+  > 
+  > If it makes a syntax mistake or a test fails, you will see it read the terminal output and **fix its own bugs** in real-time. It doesn't stop until the entire goal is met."
 
-"Three layers working together: .antigravity.md orchestrates the workflow, skills provide expert guidance, and MCP connects to your real systems. That's the difference between Antigravity-generated code and Antigravity-assisted production code."
+### 5. Visual Wow & Proof of Correctness
+- **Action**: Run unit tests and start the dev server:
+  ```bash
+  bun test
+  bun dev
+  ```
+- **Talk Track**:
+  > "Let's run the tests. Look at that—20 out of 20 tests pass completely green! 
+  > 
+  > Now let's open `http://localhost:3000`. We have a fully featured, stunning Amber-themed workstation. We can add priorities, set due dates, watch overdue indicators alert us, filter by tags, and track our productivity in real-time. 
+  > 
+  > That is the power of Antigravity: interactive alignment, rigorous planning, and flawless autonomous execution."
