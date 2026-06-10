@@ -26,11 +26,11 @@ fi
 case "$STAGE" in
   1)         BRANCH="stage-1-yolo" ;;
   2)         BRANCH="stage-2-skills" ;;
-  3)         BRANCH="stage-3-mcp" ;;
+  3)         BRANCH="stage-3-grill" ;;
   4)         BRANCH="stage-4-deploy" ;;
   1-backup)  BRANCH="stage-1-backup" ;;
   2-backup)  BRANCH="stage-2-backup" ;;
-  3-backup)  BRANCH="stage-3-backup" ;;
+  3-backup)  BRANCH="stage-3-grill-backup" ;;
   4-backup)  BRANCH="stage-4-backup" ;;
   *)
     echo "Error: Unknown stage '${STAGE}'"
