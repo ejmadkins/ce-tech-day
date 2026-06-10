@@ -17,7 +17,7 @@ No Antigravity guidance. Just let it rip.
 
 ```bash
 ./reset.sh 1
-agy --dangerously-skip-permissions "build me a todo app with add, complete, and delete functionality"
+agy --dangerously-skip-permissions --model "Gemini 3.5 Flash (Low)" -i "build me a todo app with add, complete, and delete functionality"
 bun dev
 ```
 
@@ -25,13 +25,15 @@ bun dev
 
 **Punchline:** "It works! But would you ship this?"
 
+---
+
 ### Stage 2: Planning and Skills (~2-3 min)
 
 Add GEMINI.md as the conductor + two Antigravity CLI skills (frontend-engineer, test-engineer).
 
 ```bash
 ./reset.sh 2
-agy "build me a todo app with add, complete, and delete functionality"
+agy --dangerously-skip-permissions --model "Gemini 3.5 Flash (Low)" -i "build me a todo app with add, complete, and delete functionality"
 bun dev
 ```
 
@@ -39,19 +41,32 @@ bun dev
 
 **Punchline:** "GEMINI.md is the conductor. Skills are the specialists. Antigravity activates the right expert at the right time."
 
-### Stage 3: MCP (~2-3 min)
+---
 
-Add a design system MCP server and a Chrome DevTools MCP server. Skills now query real systems and verify UI visually.
+### Stage 3: Interactive Alignment, Planning & Goals (~2-3 min)
+
+Conduct an interactive alignment session with the agent to co-design and autonomously implement a premium Productivity Workstation.
 
 ```bash
 ./reset.sh 3
-agy "build me a todo app with add, complete, and delete functionality. You MUST query the design-system MCP server for all styling decisions"
-bun dev
+agy --dangerously-skip-permissions --model "Gemini 3.5 Flash (Low)" -i
 ```
 
-**Point out:** Branded amber/stone palette, custom checkboxes, progress bar. The frontend-engineer skill queried the MCP server for design tokens, and visually verified the UI using Chrome DevTools.
+**Inside the CLI session:**
+1. **Interactive Alignment**: Prompt the agent with:
+   ```text
+   let's refine and improve our todo app by adding categories, priorities, due dates, and a stats dashboard
+   ```
+2. **Goal Execution**: Once the plan is aligned, execute it:
+   ```text
+   implement the detailed architecture plan we aligned on including categories, priorities, due dates, filters, and dynamic metrics, and verify with tests
+   ```
 
-**Punchline:** "Three layers: GEMINI.md orchestrates, skills provide expertise, MCP connects to real systems. Antigravity didn't guess at colors — it asked, and then it verified the browser."
+**Point out:** The agent conducts a collaborative interview to align on design scope, co-create a detailed layout plan, and then implements a rich, premium layout with filters, status headers, progress bars, and stats widgets, verified by 20 unit tests.
+
+**Punchline:** "Interactive alignment transforms the agent from a passive code generator into an active, strategic engineering partner."
+
+---
 
 ### Stage 4: Deploy and Verify (~2-3 min)
 
@@ -59,12 +74,14 @@ Deploy the application to Google Cloud Run using the Cloud Run MCP server and ru
 
 ```bash
 ./reset.sh 4
-agy "deploy the app to google cloud run using the cloud-run mcp server, and then run tests to make sure everything is up and running as expected"
+agy --dangerously-skip-permissions --model "Gemini 3.5 Flash (Low)" -i "deploy our application to Cloud Run"
 ```
 
-**Point out:** The agent provisions infrastructure and pushes the container. It then tests the live deployment URL to verify the service is running.
+**Point out:** The agent provisions infrastructure and pushes the container using the native `cloud-run` MCP server tools. It then tests the live deployment URL to verify the service is running.
 
 **Punchline:** "We've gone from a local blank canvas to a branded, tested, and deployed application—all by orchestrating the right tools with the right skills."
+
+---
 
 ## Fallback
 
@@ -78,7 +95,7 @@ If live coding goes sideways, use backup branches with pre-generated output:
 bun dev
 ```
 
-Each backup branch includes a `PRESENTER.md` with talking points.
+Each backup branch includes a `PRESENTER.md` and `TALK_TRACK.md` with talking points.
 
 ## Branch Structure
 
@@ -87,15 +104,15 @@ Each backup branch includes a `PRESENTER.md` with talking points.
 | `main` | This README + reset script |
 | `stage-1-yolo` | Bare Next.js boilerplate |
 | `stage-2-skills` | Boilerplate + GEMINI.md + `.agents/skills/` (frontend-engineer, test-engineer) |
-| `stage-3-mcp` | Boilerplate + GEMINI.md + skills + MCP design system server |
+| `stage-3-grill` | Boilerplate + GEMINI.md + skills + Q&A interactive grill setup |
 | `stage-4-deploy` | Boilerplate + GEMINI.md + skills + MCP servers + setup for Cloud Run deployment |
 | `stage-1-backup` | Pre-generated yolo output |
 | `stage-2-backup` | Pre-generated skills output |
-| `stage-3-backup` | Pre-generated MCP output |
+| `stage-3-grill-backup` | Pre-generated alignment & goals output |
 | `stage-4-backup` | Pre-generated deployment output |
 
 ## Tech Stack
 
 - Next.js (App Router) + TypeScript + Tailwind CSS
 - Bun (runtime + package manager)
-- MCP server (`@modelcontextprotocol/sdk`) for design system
+- MCP server (`@modelcontextprotocol/sdk`) for Cloud Run and browser control
