@@ -40,11 +40,11 @@ When building features, follow this process:
 
 Always activate the relevant skill before starting each phase.
 
-## ADK AI Sidekick Integration (CRITICAL FOR STAGE 4)
+## ADK AI Sidekick Integration (CRITICAL FOR STAGES 3 & 4)
 
 This project has a pre-built, production-grade **Agent Development Kit (ADK)** backend API route at `src/app/api/agent/route.ts`.
 
-When instructed to augment our application with an AI assistant, AI sidebar, or ADK agent, you MUST leverage this pre-built route instead of writing a new backend. Your task is to implement the **AI Sidekick Sidebar** on the frontend:
+The **AI Sidekick Sidebar** is a core requirement that MUST be fully implemented and integrated on the frontend in both Stage 3 and Stage 4. You MUST leverage this pre-built route instead of writing a new backend, and implement the **AI Sidekick Sidebar** on the frontend:
 
 1. **Collapsible Slide-out Sidebar (`src/components/AgentSidebar.tsx`)**:
    - Lies on the right side of the screen, sliding in/out from the right with smooth animations using `transitions.normal`.
