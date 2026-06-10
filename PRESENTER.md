@@ -28,7 +28,7 @@ Each stage is mapped to a Git branch. You can reset to any stage instantly using
 * **Goal**: Prompt Antigravity to build a basic To-Do app with zero guardrails.
 * **Prompt**: 
   ```text
-  agy --dangerously-skip-permissions "build me a todo app with add, complete, and delete functionality"
+  agy --dangerously-skip-permissions --model "Gemini 3.5 Flash (Low)" -i "build me a todo app with add, complete, and delete functionality"
   ```
 * **Key Talking Points**:
   * Antigravity builds a single, large file with generic/plain styling.
@@ -42,7 +42,7 @@ Each stage is mapped to a Git branch. You can reset to any stage instantly using
 * **Goal**: Enable specialized guidelines (skills) and structured workflow planning.
 * **Prompt**: 
   ```text
-  agy "build me a todo app with add, complete, and delete functionality"
+  agy --dangerously-skip-permissions --model "Gemini 3.5 Flash (Low)" -i "build me a todo app with add, complete, and delete functionality"
   ```
 * **Key Talking Points**:
   * **Structured Plan**: The agent first generates an implementation plan (`GEMINI.md`) before writing any code.
@@ -50,17 +50,27 @@ Each stage is mapped to a Git branch. You can reset to any stage instantly using
 
 ---
 
-### Stage 3: Enterprise Design System (MCP + Browser Verification)
+### Stage 3: Interactive Alignment, Planning & Goals
 * **Reset Command**: `./reset.sh 3` (or `./reset.sh 3-backup` for pre-generated code)
-* **Goal**: Force Antigravity to adhere to an enterprise design system served via MCP.
+* **Goal**: Launch an interactive Q&A alignment session with Antigravity to refine requirements, co-create a detailed architecture plan, and execute it autonomously under Goal mode.
 * **Prompt**: 
   ```text
-  agy "build me a todo app with add, complete, and delete functionality following our design system"
+  agy --dangerously-skip-permissions --model "Gemini 3.5 Flash (Low)" -i
   ```
+* **Interactive Steps**:
+  1. **Q&A Interactive Alignment**: Once inside the CLI, enter:
+     ```text
+     let's refine and improve our todo app by adding categories, priorities, due dates, and a stats dashboard
+     ```
+  2. **Goal Execution**: Once the plan is aligned and created, execute it:
+     ```text
+     implement the detailed architecture plan we aligned on including categories, priorities, due dates, filters, and dynamic metrics, and verify with tests
+     ```
 * **Key Talking Points**:
-  * **Zero Guesswork**: The agent is blocked from styling until it queries the design system MCP server via `get_design_tokens` and `get_component_spec`.
-  * **Premium Aesthetics**: It produces a stunning, warm amber-tinted interface, custom checkbox SVG animations, and completion progress bars.
-  * **Visual Feedback**: The agent runs the browser using the `chrome-devtools` MCP server, taking screenshots to visually verify colors and layouts.
+  * **Interactive Alignment (Grill Me)**: The agent doesn't just guess requirements—it conducts an interactive interview to align on design decisions and scope.
+  * **Co-Created Plan**: It generates a structured architectural plan directly in partnership with the developer.
+  * **Autonomous Execution**: The agent translates the plan into a fully functional premium workstation with zero manual coding.
+  * **Premium Aesthetics**: It produces a stunning UI with status headers, completion progress bars, category filter chips, and interactive charts.
 
 ---
 
@@ -69,7 +79,7 @@ Each stage is mapped to a Git branch. You can reset to any stage instantly using
 * **Goal**: Provision, manage, and verify a Google Cloud Run service directly via the Cloud Run MCP server.
 * **Prompt**:
   ```text
-  agy "deploy our application to Cloud Run"
+  agy --dangerously-skip-permissions --model "Gemini 3.5 Flash (Low)" -i "deploy our application to Cloud Run"
   ```
 * **Key Talking Points**:
   * **Agent-Native Control**: No more running manual `gcloud` shell commands. The agent uses the `cloud-run` MCP server tools (like `list_services` and `deploy_service_from_image`) to manage infrastructure.
