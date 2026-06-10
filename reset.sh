@@ -91,16 +91,16 @@ echo ""
 
 case "$STAGE" in
   1)
-    echo "Prompt: agy --dangerously-skip-permissions \"build me a todo app with add, complete, and delete functionality\""
+    echo "Prompt: agy --dangerously-skip-permissions --model \"Gemini 3.5 Flash (Low)\" -i \"build me a todo app with add, complete, and delete functionality\""
     ;;
   2)
-    echo "Prompt: agy \"build me a todo app with add, complete, and delete functionality\""
+    echo "Prompt: agy --dangerously-skip-permissions --model \"Gemini 3.5 Flash (Low)\" -i \"build me a todo app with add, complete, and delete functionality\""
     ;;
   3)
-    echo "Prompt: agy \"build me a todo app with add, complete, and delete functionality following our design system\""
+    echo "Prompt: agy --dangerously-skip-permissions --model \"Gemini 3.5 Flash (Low)\" -i \"build me a todo app with add, complete, and delete functionality following our design system\""
     ;;
   4)
-    echo "Prompt: agy \"deploy our application to Cloud Run\""
+    echo "Prompt: agy --dangerously-skip-permissions --model \"Gemini 3.5 Flash (Low)\" -i \"deploy our application to Cloud Run\""
     ;;
   *-backup)
     echo "Run: bun dev"
