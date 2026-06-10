@@ -13,11 +13,11 @@ if [ -z "$STAGE" ]; then
   echo "Stages:"
   echo "  1          Stage 1: Yolo mode (bare Next.js, no AI config)"
   echo "  2          Stage 2: Skills + Plan mode (GEMINI.md)"
-  echo "  3          Stage 3: MCP design system server"
+  echo "  3          Stage 3: Interactive Alignment, Planning & Goals"
   echo "  4          Stage 4: Cloud Run Deployment"
   echo "  1-backup   Pre-generated Stage 1 output"
   echo "  2-backup   Pre-generated Stage 2 output"
-  echo "  3-backup   Pre-generated Stage 3 output"
+  echo "  3-backup   Pre-generated Stage 3 output (Interactive, Planning, Goals)"
   echo "  4-backup   Pre-generated Stage 4 output"
   exit 1
 fi
