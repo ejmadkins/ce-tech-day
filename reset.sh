@@ -98,6 +98,13 @@ case "$STAGE" in
     ;;
   3)
     echo "Prompt: agy --dangerously-skip-permissions --model \"Gemini 3.5 Flash (Low)\" -i"
+    echo ""
+    echo "Prompts to enter inside the interactive CLI session:"
+    echo "  1. Q&A Interactive Alignment:"
+    echo "     let's refine and improve our todo app by adding categories, priorities, due dates, and a stats dashboard"
+    echo ""
+    echo "  2. Goal Execution (implements your aligned plan autonomously):"
+    echo "     implement the detailed architecture plan we aligned on including categories, priorities, due dates, filters, and dynamic metrics, and verify with tests"
     ;;
   4)
     echo "Prompt: agy --dangerously-skip-permissions --model \"Gemini 3.5 Flash (Low)\" -i \"deploy our application to Cloud Run\""
