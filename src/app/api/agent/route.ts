@@ -228,6 +228,14 @@ export async function POST(request: Request) {
     let responseText = "";
     const activeSession = sessionId || "default-session";
 
+    // Ensure session is pre-created in the transient InMemorySessionService
+    await sessionService.createSession({
+      appName: "TodoAgentApp",
+      userId: "user",
+      sessionId: activeSession,
+    });
+
+
     // Run the agent loop
     for await (const event of runner.runAsync({
       userId: "user",
