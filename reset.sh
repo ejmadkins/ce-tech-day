@@ -110,6 +110,15 @@ if [ -f "mcp-server/package.json" ]; then
   cd mcp-server && bun install --silent && cd ..
 fi
 
+# Automatically configure GenAI & Vertex AI environment variables for local runs and builds
+echo "Setting up local GenAI and Vertex credentials in .env..."
+cat <<EOF > .env
+GOOGLE_GENAI_USE_VERTEXAI=true
+GOOGLE_CLOUD_PROJECT=ejmadkins-summit26-agy
+GOOGLE_CLOUD_LOCATION=us-central1
+GEMINI_MODEL=gemini-2.5-flash
+EOF
+cp .env .env.production
 echo ""
 echo "==============================="
 echo "  Ready for Stage ${STAGE}!"
@@ -118,13 +127,13 @@ echo ""
 
 case "$STAGE" in
   1)
-    echo "Prompt: agy --dangerously-skip-permissions --model \"Gemini 3.5 Flash (Low)\" -i \"build me a todo app with add, complete, and delete functionality\""
+    echo "Prompt: agy --dangerously-skip-permissions --model \"gemini-2.5-flash\" -i \"build me a todo app with add, complete, and delete functionality\""
     ;;
   2)
-    echo "Prompt: agy --dangerously-skip-permissions --model \"Gemini 3.5 Flash (Low)\" -i \"build me a todo app with add, complete, and delete functionality\""
+    echo "Prompt: agy --dangerously-skip-permissions --model \"gemini-2.5-flash\" -i \"build me a todo app with add, complete, and delete functionality\""
     ;;
   3)
-    echo "Prompt: agy --dangerously-skip-permissions --model \"Gemini 3.5 Flash (Low)\" -i"
+    echo "Prompt: agy --dangerously-skip-permissions --model \"gemini-2.5-flash\" -i"
     echo ""
     echo "Prompts to enter inside the interactive CLI session:"
     echo "  1. Q&A Interactive Alignment:"
@@ -134,7 +143,7 @@ case "$STAGE" in
     echo "     implement the detailed architecture plan we aligned on including categories, priorities, due dates, filters, and dynamic metrics, and verify with tests"
     ;;
   4)
-    echo "Prompt: agy --dangerously-skip-permissions --model \"Gemini 3.5 Flash (Low)\" -i \"deploy our application to Cloud Run\""
+    echo "Prompt: agy --dangerously-skip-permissions --model \"gemini-2.5-flash\" -i \"deploy our application to Cloud Run\""
     ;;
   *-backup)
     echo "Run: bun dev"
