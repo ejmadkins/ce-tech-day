@@ -67,10 +67,37 @@ pgrep -f "agy" | while read -r pid; do
 done
 
 
+# Back up Stage 3 generated app if transitioning to Stage 4 or Stage 4-backup
+PRESERVE_SRC=false
+if [ "$STAGE" = "4" ] || [ "$STAGE" = "4-backup" ]; then
+  if [ -d "src" ]; then
+    echo "Backing up Stage 3 generated app in src/..."
+    rm -rf /tmp/stage3_src_backup 2>/dev/null || true
+    cp -r src /tmp/stage3_src_backup
+    PRESERVE_SRC=true
+  fi
+  rm -rf /tmp/stage3_plans_backup 2>/dev/null || true
+  mkdir -p /tmp/stage3_plans_backup
+  cp *plan*.md /tmp/stage3_plans_backup/ 2>/dev/null || true
+  cp *plan*.txt /tmp/stage3_plans_backup/ 2>/dev/null || true
+fi
+
 # Discard any changes and switch branch
 git checkout -- . 2>/dev/null || true
 git clean -fd 2>/dev/null || true
 git checkout "${BRANCH}"
+
+# Restore Stage 3 generated app if backed up
+if [ "$PRESERVE_SRC" = true ] && [ -d "/tmp/stage3_src_backup" ]; then
+  echo "Restoring Stage 3 generated app into src/ for deployment..."
+  rm -rf src
+  cp -r /tmp/stage3_src_backup src
+  rm -rf /tmp/stage3_src_backup
+fi
+if [ -d "/tmp/stage3_plans_backup" ] && [ "$(ls -A /tmp/stage3_plans_backup 2>/dev/null)" ]; then
+  cp -r /tmp/stage3_plans_backup/* . 2>/dev/null || true
+  rm -rf /tmp/stage3_plans_backup
+fi
 
 # Install dependencies
 echo ""
