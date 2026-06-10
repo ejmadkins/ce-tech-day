@@ -13,11 +13,11 @@ if [ -z "$STAGE" ]; then
   echo "Stages:"
   echo "  1          Stage 1: Yolo mode (bare Next.js, no AI config)"
   echo "  2          Stage 2: Skills + Plan mode (GEMINI.md)"
-  echo "  3          Stage 3: MCP design system server"
+  echo "  3          Stage 3: Interactive Alignment, Planning & Goals"
   echo "  4          Stage 4: Cloud Run Deployment"
   echo "  1-backup   Pre-generated Stage 1 output"
   echo "  2-backup   Pre-generated Stage 2 output"
-  echo "  3-backup   Pre-generated Stage 3 output"
+  echo "  3-backup   Pre-generated Stage 3 output (Interactive, Planning, Goals)"
   echo "  4-backup   Pre-generated Stage 4 output"
   exit 1
 fi
@@ -110,6 +110,28 @@ if [ -f "mcp-server/package.json" ]; then
   cd mcp-server && bun install --silent && cd ..
 fi
 
+# Automatically configure GenAI & Vertex AI environment variables for local runs and builds
+echo ""
+echo "Configuring Vertex AI environment..."
+
+# Detect current gcloud project ID as default
+DEFAULT_PROJECT=$(gcloud config get-value project 2>/dev/null || true)
+if [ -z "$DEFAULT_PROJECT" ]; then
+  DEFAULT_PROJECT="ejmadkins-summit26-agy"
+fi
+
+# Prompt the presenter to confirm or override the project ID
+read -p "Enter Google Cloud Project ID [$DEFAULT_PROJECT]: " USER_PROJECT_ID
+PROJECT_ID=${USER_PROJECT_ID:-$DEFAULT_PROJECT}
+
+echo "Setting up local GenAI and Vertex credentials in .env using project: $PROJECT_ID..."
+cat <<EOF > .env
+GOOGLE_GENAI_USE_VERTEXAI=true
+GOOGLE_CLOUD_PROJECT=$PROJECT_ID
+GOOGLE_CLOUD_LOCATION=us-central1
+GEMINI_MODEL=gemini-2.5-flash
+EOF
+cp .env .env.production
 echo ""
 echo "==============================="
 echo "  Ready for Stage ${STAGE}!"
