@@ -52,6 +52,21 @@ echo ""
 # Kill any running Next.js dev server
 pkill -f "next dev" 2>/dev/null || true
 
+# Kill any running MCP servers or watchdogs from previous runs
+pkill -f "mcp-server/index.js" 2>/dev/null || true
+pkill -f "chrome-devtools-mcp" 2>/dev/null || true
+
+# Kill any orphaned non-interactive agy processes (sparing the active interactive -i session)
+pgrep -f "agy" | while read -r pid; do
+  if [ "$pid" != "$$" ] && [ "$pid" != "$PPID" ]; then
+    cmd=$(ps -p "$pid" -o args= 2>/dev/null || true)
+    if echo "$cmd" | grep -q "agy" && ! echo "$cmd" | grep -q -- "-i"; then
+      kill -9 "$pid" 2>/dev/null || true
+    fi
+  fi
+done
+
+
 # Discard any changes and switch branch
 git checkout -- . 2>/dev/null || true
 git clean -fd 2>/dev/null || true
